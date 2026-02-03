@@ -1,6 +1,9 @@
 import logoIcon from '@/assets/logo-icon.png';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
+  
   return (
     <footer className="py-8 border-t border-border bg-muted/30">
       <div className="container px-4">
@@ -12,12 +15,11 @@ const Footer = () => {
               className="h-8 w-8"
             />
             <span className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Preventick. All rights reserved.
+              © {new Date().getFullYear()} Preventick. {t('footer.rights')}
             </span>
           </div>
           <p className="text-xs text-muted-foreground text-center md:text-right max-w-md">
-            This tool is for informational purposes only. Always consult with local experts 
-            and health authorities for tick prevention advice specific to your region.
+            {t('footer.disclaimer')}
           </p>
         </div>
       </div>

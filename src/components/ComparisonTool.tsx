@@ -3,6 +3,7 @@ import FilterPanel from './FilterPanel';
 import InterventionCard from './InterventionCard';
 import { interventions } from '@/data/interventions';
 import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel } from '@/data/interventions';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const effectivenessScores: Record<EffectivenessLevel, number> = {
   high: 100,
@@ -45,6 +46,7 @@ const calculateScore = (
 };
 
 const ComparisonTool = () => {
+  const { t } = useLanguage();
   const [effectivenessWeight, setEffectivenessWeight] = useState(50);
   const [ecoWeight, setEcoWeight] = useState(30);
   const [costWeight, setCostWeight] = useState(20);
@@ -78,11 +80,10 @@ const ComparisonTool = () => {
       <div className="container px-4">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-foreground mb-3">
-            Compare Tick Prevention Solutions
+            {t('compare.title')}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Adjust your priorities and we'll rank the solutions that best match your values. 
-            Click on any solution to see detailed information.
+            {t('compare.description')}
           </p>
         </div>
 
@@ -107,7 +108,7 @@ const ComparisonTool = () => {
           <div className="lg:col-span-3">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm text-muted-foreground">
-                Showing {rankedInterventions.length} solutions
+                {t('compare.showing')} {rankedInterventions.length} {t('compare.solutions')}
               </span>
             </div>
 
@@ -124,7 +125,7 @@ const ComparisonTool = () => {
 
             {rankedInterventions.length === 0 && (
               <div className="text-center py-12 text-muted-foreground">
-                No solutions match your current filters. Try selecting more categories.
+                {t('compare.noResults')}
               </div>
             )}
           </div>

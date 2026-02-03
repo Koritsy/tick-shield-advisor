@@ -15,6 +15,7 @@ import {
   XCircle
 } from 'lucide-react';
 import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel } from '@/data/interventions';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface InterventionCardProps {
   intervention: Intervention;
@@ -22,31 +23,46 @@ interface InterventionCardProps {
   rank: number;
 }
 
-const effectivenessConfig: Record<EffectivenessLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
-  high: { icon: CheckCircle2, label: 'High', className: 'text-effectiveness-high bg-effectiveness-high/10' },
-  medium: { icon: AlertTriangle, label: 'Medium', className: 'text-effectiveness-medium bg-effectiveness-medium/10' },
-  low: { icon: XCircle, label: 'Low', className: 'text-effectiveness-low bg-effectiveness-low/10' },
-  unknown: { icon: HelpCircle, label: 'Unknown', className: 'text-effectiveness-unknown bg-effectiveness-unknown/10' },
-};
-
-const ecoConfig: Record<EcoLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
-  safe: { icon: CheckCircle2, label: 'Safe', className: 'text-eco-safe bg-eco-safe/10' },
-  caution: { icon: AlertTriangle, label: 'Caution', className: 'text-eco-caution bg-eco-caution/10' },
-  risk: { icon: XCircle, label: 'Risk', className: 'text-eco-risk bg-eco-risk/10' },
-};
-
-const costConfig: Record<CostLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
-  low: { icon: CheckCircle2, label: 'Low', className: 'text-cost-low bg-cost-low/10' },
-  medium: { icon: AlertTriangle, label: 'Medium', className: 'text-cost-medium bg-cost-medium/10' },
-  high: { icon: XCircle, label: 'High', className: 'text-cost-high bg-cost-high/10' },
-};
-
 const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { language, t } = useLanguage();
 
-  const EffectivenessIcon = effectivenessConfig[intervention.effectiveness].icon;
-  const EcoIcon = ecoConfig[intervention.environmentalImpact].icon;
-  const CostIcon = costConfig[intervention.cost].icon;
+  const effectivenessConfig: Record<EffectivenessLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
+    high: { icon: CheckCircle2, label: t('effectiveness.high'), className: 'text-effectiveness-high bg-effectiveness-high/10' },
+    medium: { icon: AlertTriangle, label: t('effectiveness.medium'), className: 'text-effectiveness-medium bg-effectiveness-medium/10' },
+    low: { icon: XCircle, label: t('effectiveness.low'), className: 'text-effectiveness-low bg-effectiveness-low/10' },
+    unknown: { icon: HelpCircle, label: t('effectiveness.unknown'), className: 'text-effectiveness-unknown bg-effectiveness-unknown/10' },
+  };
+
+  const ecoConfig: Record<EcoLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
+    safe: { icon: CheckCircle2, label: t('eco.safe'), className: 'text-eco-safe bg-eco-safe/10' },
+    caution: { icon: AlertTriangle, label: t('eco.caution'), className: 'text-eco-caution bg-eco-caution/10' },
+    risk: { icon: XCircle, label: t('eco.risk'), className: 'text-eco-risk bg-eco-risk/10' },
+  };
+
+  const costConfig: Record<CostLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
+    low: { icon: CheckCircle2, label: t('cost.low'), className: 'text-cost-low bg-cost-low/10' },
+    medium: { icon: AlertTriangle, label: t('cost.medium'), className: 'text-cost-medium bg-cost-medium/10' },
+    high: { icon: XCircle, label: t('cost.high'), className: 'text-cost-high bg-cost-high/10' },
+  };
+
+  const categoryLabels: Record<string, Record<string, string>> = {
+    en: {
+      personal: 'Personal Protection',
+      landscaping: 'Landscaping',
+      wildlife: 'Wildlife Management',
+      other: 'Other',
+    },
+    fr: {
+      personal: 'Protection personnelle',
+      landscaping: 'Aménagement paysager',
+      wildlife: 'Gestion de la faune',
+      other: 'Autre',
+    },
+  };
+
+  const displayName = language === 'fr' ? intervention.nameFr : intervention.name;
+  const categoryLabel = categoryLabels[language][intervention.category] || intervention.categoryLabel;
 
   return (
     <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in">
@@ -55,16 +71,16 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <Badge variant="secondary" className="text-xs font-medium">
-                {intervention.categoryLabel}
+                {categoryLabel}
               </Badge>
               {intervention.evidenceQuality === 'strong' && (
                 <Badge variant="outline" className="text-xs bg-primary/5 text-primary border-primary/20">
-                  Strong Evidence
+                  {t('card.strongEvidence')}
                 </Badge>
               )}
             </div>
             <CardTitle className="text-lg font-bold leading-tight">
-              {intervention.name}
+              {displayName}
             </CardTitle>
           </div>
           <div className="flex flex-col items-end gap-1">
@@ -72,7 +88,7 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
               #{rank}
             </div>
             <span className="text-xs text-muted-foreground font-medium">
-              Score: {Math.round(score)}
+              {t('card.score')}: {Math.round(score)}
             </span>
           </div>
         </div>
@@ -109,7 +125,7 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
         >
           <span className="flex items-center gap-2">
             <Info className="h-4 w-4" />
-            {isExpanded ? 'Hide Details' : 'Show Details'}
+            {isExpanded ? t('card.hideDetails') : t('card.showDetails')}
           </span>
           {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </Button>
@@ -119,33 +135,33 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
           <div className="mt-4 pt-4 border-t border-border space-y-4 animate-fade-in">
             <DetailSection 
               icon={<Shield className="h-4 w-4 text-primary" />}
-              title="Effectiveness"
+              title={t('card.effectiveness')}
               content={intervention.effectivenessDetails}
-              badge={intervention.evidenceQuality === 'strong' ? 'Strong evidence' : 'Limited evidence'}
+              badge={intervention.evidenceQuality === 'strong' ? t('card.strongEvidence') : t('card.limitedEvidence')}
               badgeVariant={intervention.evidenceQuality === 'strong' ? 'default' : 'secondary'}
             />
             
             <DetailSection 
               icon={<Leaf className="h-4 w-4 text-primary" />}
-              title="Environmental Impact"
+              title={t('card.environmentalImpact')}
               content={intervention.environmentalDetails}
             />
             
             <DetailSection 
               icon={<AlertTriangle className="h-4 w-4 text-primary" />}
-              title="Health & Safety"
+              title={t('card.healthSafety')}
               content={intervention.healthRisks}
             />
             
             <DetailSection 
               icon={<DollarSign className="h-4 w-4 text-primary" />}
-              title="Cost Details"
-              content={`${intervention.costDetails}. Annual investment: ${intervention.annualInvestment}`}
+              title={t('card.costDetails')}
+              content={`${intervention.costDetails}. ${t('card.annualInvestment')}: ${intervention.annualInvestment}`}
             />
             
             <DetailSection 
               icon={<Info className="h-4 w-4 text-primary" />}
-              title="Ease of Use"
+              title={t('card.easeOfUse')}
               content={`${intervention.easeOfUse}. ${intervention.availability}`}
             />
           </div>

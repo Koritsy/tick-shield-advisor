@@ -2,6 +2,7 @@ import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Leaf, DollarSign, Filter } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FilterPanelProps {
   effectivenessWeight: number;
@@ -14,13 +15,6 @@ interface FilterPanelProps {
   onCategoryToggle: (category: string) => void;
 }
 
-const categories = [
-  { id: 'personal', label: 'Personal Protection' },
-  { id: 'landscaping', label: 'Landscaping' },
-  { id: 'wildlife', label: 'Wildlife Management' },
-  { id: 'other', label: 'Other' },
-];
-
 const FilterPanel = ({
   effectivenessWeight,
   ecoWeight,
@@ -31,15 +25,24 @@ const FilterPanel = ({
   selectedCategories,
   onCategoryToggle,
 }: FilterPanelProps) => {
+  const { t } = useLanguage();
+  
+  const categories = [
+    { id: 'personal', label: t('filter.category.personal') },
+    { id: 'landscaping', label: t('filter.category.landscaping') },
+    { id: 'wildlife', label: t('filter.category.wildlife') },
+    { id: 'other', label: t('filter.category.other') },
+  ];
+
   return (
     <div className="glass-card rounded-2xl p-6 animate-fade-in">
       <div className="flex items-center gap-2 mb-6">
         <Filter className="h-5 w-5 text-primary" />
-        <h2 className="text-lg font-bold text-foreground">Your Priorities</h2>
+        <h2 className="text-lg font-bold text-foreground">{t('filter.title')}</h2>
       </div>
       
       <p className="text-sm text-muted-foreground mb-6">
-        Adjust the sliders to prioritize what matters most to you. Solutions will be ranked accordingly.
+        {t('filter.description')}
       </p>
 
       <div className="space-y-6">
@@ -48,7 +51,7 @@ const FilterPanel = ({
           <div className="flex items-center justify-between">
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Shield className="h-4 w-4 text-effectiveness-high" />
-              Effectiveness
+              {t('filter.effectiveness')}
             </Label>
             <span className="text-sm font-semibold text-primary">{effectivenessWeight}%</span>
           </div>
@@ -60,7 +63,7 @@ const FilterPanel = ({
             className="w-full"
           />
           <p className="text-xs text-muted-foreground">
-            How important is proven effectiveness at reducing tick populations?
+            {t('filter.effectiveness.help')}
           </p>
         </div>
 
@@ -69,7 +72,7 @@ const FilterPanel = ({
           <div className="flex items-center justify-between">
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Leaf className="h-4 w-4 text-eco-safe" />
-              Eco-Friendly
+              {t('filter.ecoFriendly')}
             </Label>
             <span className="text-sm font-semibold text-primary">{ecoWeight}%</span>
           </div>
@@ -81,7 +84,7 @@ const FilterPanel = ({
             className="w-full"
           />
           <p className="text-xs text-muted-foreground">
-            How important is minimizing environmental impact?
+            {t('filter.ecoFriendly.help')}
           </p>
         </div>
 
@@ -90,7 +93,7 @@ const FilterPanel = ({
           <div className="flex items-center justify-between">
             <Label className="flex items-center gap-2 text-sm font-medium">
               <DollarSign className="h-4 w-4 text-cost-low" />
-              Affordability
+              {t('filter.affordability')}
             </Label>
             <span className="text-sm font-semibold text-primary">{costWeight}%</span>
           </div>
@@ -102,14 +105,14 @@ const FilterPanel = ({
             className="w-full"
           />
           <p className="text-xs text-muted-foreground">
-            How important is keeping costs low?
+            {t('filter.affordability.help')}
           </p>
         </div>
       </div>
 
       {/* Category Filters */}
       <div className="mt-8 pt-6 border-t border-border">
-        <Label className="text-sm font-medium mb-3 block">Filter by Category</Label>
+        <Label className="text-sm font-medium mb-3 block">{t('filter.categories')}</Label>
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
             <Badge

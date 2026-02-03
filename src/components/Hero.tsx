@@ -1,6 +1,9 @@
 import { Shield, Leaf, DollarSign } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-accent py-16 md:py-24">
       {/* Background pattern */}
@@ -18,26 +21,25 @@ const Hero = () => {
       <div className="container relative z-10 px-4">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-primary-foreground md:text-5xl lg:text-6xl">
-            Protect Your Property
-            <span className="block mt-2 text-primary-foreground/90">From Ticks</span>
+            {t('hero.title')}
+            <span className="block mt-2 text-primary-foreground/90">{t('hero.subtitle')}</span>
           </h1>
           <p className="mb-10 text-lg text-primary-foreground/80 md:text-xl">
-            Compare tick prevention solutions based on what matters most to you. 
-            Find the right balance between effectiveness, eco-friendliness, and cost.
+            {t('hero.description')}
           </p>
           
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="flex items-center justify-center gap-3 rounded-xl bg-primary-foreground/10 px-4 py-3 backdrop-blur-sm">
               <Shield className="h-6 w-6 text-primary-foreground" />
-              <span className="font-semibold text-primary-foreground">Effectiveness</span>
+              <span className="font-semibold text-primary-foreground">{t('hero.effectiveness')}</span>
             </div>
             <div className="flex items-center justify-center gap-3 rounded-xl bg-primary-foreground/10 px-4 py-3 backdrop-blur-sm">
               <Leaf className="h-6 w-6 text-primary-foreground" />
-              <span className="font-semibold text-primary-foreground">Eco-Friendly</span>
+              <span className="font-semibold text-primary-foreground">{t('hero.ecoFriendly')}</span>
             </div>
             <div className="flex items-center justify-center gap-3 rounded-xl bg-primary-foreground/10 px-4 py-3 backdrop-blur-sm">
               <DollarSign className="h-6 w-6 text-primary-foreground" />
-              <span className="font-semibold text-primary-foreground">Affordability</span>
+              <span className="font-semibold text-primary-foreground">{t('hero.affordability')}</span>
             </div>
           </div>
         </div>

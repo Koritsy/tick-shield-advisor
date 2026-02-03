@@ -1,33 +1,36 @@
 import { SlidersHorizontal, LayoutGrid, Info } from 'lucide-react';
-
-const steps = [
-  {
-    icon: SlidersHorizontal,
-    title: 'Set Your Priorities',
-    description: 'Adjust the sliders to indicate how much you value effectiveness, eco-friendliness, and affordability.',
-  },
-  {
-    icon: LayoutGrid,
-    title: 'View Ranked Solutions',
-    description: 'Solutions are automatically ranked based on your preferences, with the best matches at the top.',
-  },
-  {
-    icon: Info,
-    title: 'Explore Details',
-    description: 'Click on any solution to see detailed information about how it works, costs, and scientific evidence.',
-  },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const HowItWorks = () => {
+  const { t } = useLanguage();
+  
+  const steps = [
+    {
+      icon: SlidersHorizontal,
+      title: t('howItWorks.step1.title'),
+      description: t('howItWorks.step1.description'),
+    },
+    {
+      icon: LayoutGrid,
+      title: t('howItWorks.step2.title'),
+      description: t('howItWorks.step2.description'),
+    },
+    {
+      icon: Info,
+      title: t('howItWorks.step3.title'),
+      description: t('howItWorks.step3.description'),
+    },
+  ];
+
   return (
     <section id="how-it-works" className="py-16 md:py-20 bg-card">
       <div className="container px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-3">
-            How It Works
+            {t('howItWorks.title')}
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Finding the right tick prevention solution is easy with our comparison tool.
+            {t('howItWorks.description')}
           </p>
         </div>
 

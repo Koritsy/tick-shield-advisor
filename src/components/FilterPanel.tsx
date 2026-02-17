@@ -1,15 +1,19 @@
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Shield, Leaf, DollarSign, Filter } from 'lucide-react';
+import { Shield, Leaf, DollarSign, Filter, HeartPulse, Wrench } from 'lucide-react';
 
 interface FilterPanelProps {
   effectivenessWeight: number;
   ecoWeight: number;
   costWeight: number;
+  healthWeight: number;
+  easeWeight: number;
   onEffectivenessChange: (value: number) => void;
   onEcoChange: (value: number) => void;
   onCostChange: (value: number) => void;
+  onHealthChange: (value: number) => void;
+  onEaseChange: (value: number) => void;
   selectedCategories: string[];
   onCategoryToggle: (category: string) => void;
 }
@@ -22,8 +26,8 @@ const categories = [
 ];
 
 const FilterPanel = ({
-  effectivenessWeight, ecoWeight, costWeight,
-  onEffectivenessChange, onEcoChange, onCostChange,
+  effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight,
+  onEffectivenessChange, onEcoChange, onCostChange, onHealthChange, onEaseChange,
   selectedCategories, onCategoryToggle,
 }: FilterPanelProps) => {
   return (
@@ -72,6 +76,30 @@ const FilterPanel = ({
           </div>
           <Slider value={[costWeight]} onValueChange={([v]) => onCostChange(v)} max={100} step={5} className="w-full" />
           <p className="text-xs text-muted-foreground">Quelle importance accordez-vous au maintien de faibles coûts?</p>
+        </div>
+
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <Label className="flex items-center gap-2 text-sm font-medium">
+              <HeartPulse className="h-4 w-4 text-eco-safe" />
+              Santé et sécurité
+            </Label>
+            <span className="text-sm font-semibold text-primary">{healthWeight}%</span>
+          </div>
+          <Slider value={[healthWeight]} onValueChange={([v]) => onHealthChange(v)} max={100} step={5} className="w-full" />
+          <p className="text-xs text-muted-foreground">Quelle importance accordez-vous à la sécurité pour la santé humaine et animale?</p>
+        </div>
+
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <Label className="flex items-center gap-2 text-sm font-medium">
+              <Wrench className="h-4 w-4 text-primary" />
+              Facilité d'utilisation
+            </Label>
+            <span className="text-sm font-semibold text-primary">{easeWeight}%</span>
+          </div>
+          <Slider value={[easeWeight]} onValueChange={([v]) => onEaseChange(v)} max={100} step={5} className="w-full" />
+          <p className="text-xs text-muted-foreground">Quelle importance accordez-vous à la simplicité de mise en œuvre?</p>
         </div>
       </div>
 

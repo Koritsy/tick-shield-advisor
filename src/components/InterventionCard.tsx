@@ -2,21 +2,14 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Shield, Leaf, DollarSign, ChevronDown, ChevronUp, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle } from 'lucide-react';
-import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel } from '@/data/interventions';
+import { Shield, Leaf, DollarSign, ChevronDown, ChevronUp, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench } from 'lucide-react';
+import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel } from '@/data/interventions';
 
 interface InterventionCardProps {
   intervention: Intervention;
   score: number;
   rank: number;
 }
-
-const categoryLabels: Record<string, string> = {
-  personal: 'Protection personnelle',
-  landscaping: 'Aménagement paysager',
-  wildlife: 'Gestion de la faune',
-  other: 'Autre',
-};
 
 const effectivenessConfig: Record<EffectivenessLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
   high: { icon: CheckCircle2, label: 'Élevée', className: 'text-effectiveness-high bg-effectiveness-high/10' },
@@ -37,6 +30,18 @@ const costConfig: Record<CostLevel, { icon: typeof CheckCircle2; label: string; 
   high: { icon: XCircle, label: 'Élevé', className: 'text-cost-high bg-cost-high/10' },
 };
 
+const healthConfig: Record<HealthSafetyLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
+  safe: { icon: CheckCircle2, label: 'Sûr', className: 'text-eco-safe bg-eco-safe/10' },
+  caution: { icon: AlertTriangle, label: 'Prudence', className: 'text-eco-caution bg-eco-caution/10' },
+  risk: { icon: XCircle, label: 'Risque', className: 'text-eco-risk bg-eco-risk/10' },
+};
+
+const easeConfig: Record<EaseOfUseLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
+  easy: { icon: CheckCircle2, label: 'Facile', className: 'text-eco-safe bg-eco-safe/10' },
+  medium: { icon: AlertTriangle, label: 'Moyen', className: 'text-eco-caution bg-eco-caution/10' },
+  hard: { icon: XCircle, label: 'Difficile', className: 'text-eco-risk bg-eco-risk/10' },
+};
+
 const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -47,7 +52,7 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <Badge variant="secondary" className="text-xs font-medium">
-                {categoryLabels[intervention.category]}
+                {intervention.categoryLabel}
               </Badge>
               {intervention.evidenceQuality === 'strong' && (
                 <Badge variant="outline" className="text-xs bg-primary/5 text-primary border-primary/20">
@@ -71,7 +76,8 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
       </CardHeader>
 
       <CardContent className="pt-0">
-        <div className="grid grid-cols-3 gap-2 mb-4">
+        {/* Métriques rapides */}
+        <div className="grid grid-cols-3 gap-2 mb-2">
           <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${effectivenessConfig[intervention.effectiveness].className}`}>
             <Shield className="h-4 w-4" />
             <span className="text-xs font-medium">{effectivenessConfig[intervention.effectiveness].label}</span>
@@ -83,6 +89,16 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
           <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${costConfig[intervention.cost].className}`}>
             <DollarSign className="h-4 w-4" />
             <span className="text-xs font-medium">{costConfig[intervention.cost].label}</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-2 mb-4">
+          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${healthConfig[intervention.healthSafety].className}`}>
+            <HeartPulse className="h-4 w-4" />
+            <span className="text-xs font-medium">{healthConfig[intervention.healthSafety].label}</span>
+          </div>
+          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${easeConfig[intervention.easeOfUse].className}`}>
+            <Wrench className="h-4 w-4" />
+            <span className="text-xs font-medium">{easeConfig[intervention.easeOfUse].label}</span>
           </div>
         </div>
 
@@ -109,9 +125,9 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
               badge={intervention.evidenceQuality === 'strong' ? 'Preuves solides' : 'Preuves limitées'}
               badgeVariant={intervention.evidenceQuality === 'strong' ? 'default' : 'secondary'} />
             <DetailSection icon={<Leaf className="h-4 w-4 text-primary" />} title="Impact environnemental" content={intervention.environmentalDetails} />
-            <DetailSection icon={<AlertTriangle className="h-4 w-4 text-primary" />} title="Santé et sécurité" content={intervention.healthRisks} />
-            <DetailSection icon={<DollarSign className="h-4 w-4 text-primary" />} title="Détails des coûts" content={`${intervention.costDetails}. Investissement annuel: ${intervention.annualInvestment}`} />
-            <DetailSection icon={<Info className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={`${intervention.easeOfUse}. ${intervention.availability}`} />
+            <DetailSection icon={<HeartPulse className="h-4 w-4 text-primary" />} title="Santé et sécurité" content={intervention.healthRisks} />
+            <DetailSection icon={<DollarSign className="h-4 w-4 text-primary" />} title="Détails des coûts" content={`${intervention.costDetails}. Investissement annuel : ${intervention.annualInvestment}`} />
+            <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={`${intervention.easeOfUseDetails} ${intervention.availability}`} />
           </div>
         )}
       </CardContent>

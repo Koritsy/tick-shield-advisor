@@ -1,4 +1,4 @@
-# Tick Shield Advisor - Comparison Tool
+# Tick Shield Advisor - Comparison Tool aa
 
 A minimal, focused React application that provides an interactive comparison tool for tick-related interventions and solutions. Users can filter and rank different solutions based on effectiveness, environmental impact, and cost.
 

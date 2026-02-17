@@ -1,110 +1,73 @@
-# Tick Shield Advisor - Comparison Tool
+# Welcome to your Lovable project
 
-A minimal, focused React application that provides an interactive comparison tool for tick-related interventions and solutions. Users can filter and rank different solutions based on effectiveness, environmental impact, and cost.
+## Project info
 
-## Features
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-- **Interactive Comparison Tool**: Browse and compare all tick-related interventions
-- **Smart Filtering**: Adjust weights for effectiveness, eco-friendliness, and affordability
-- **Category Filtering**: Filter solutions by personal protection, landscaping, wildlife management, or other categories
-- **Detailed Information**: Expand each solution to view comprehensive details
-- **Multi-language Support**: English and French interface
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
+## How can I edit this code?
 
-## Tech Stack
+There are several ways of editing your application.
 
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Fast build tool
-- **TailwindCSS** - Styling
-- **shadcn/ui** - UI components
-- **React Router** - Routing
-- **Lucide React** - Icons
+**Use Lovable**
 
-## Getting Started
+Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
 
-### Prerequisites
+Changes made via Lovable will be committed automatically to this repo.
 
-- Node.js 16+ or Bun
+**Use your preferred IDE**
 
-### Installation
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-```bash
-# Install dependencies
-npm install
-# or
-bun install
-```
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-### Development
+Follow these steps:
 
-```bash
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
-# Server runs on http://localhost:5173
 ```
 
-### Build for Production
+**Edit a file directly in GitHub**
 
-```bash
-npm run build
-```
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-### Preview Production Build
+**Use GitHub Codespaces**
 
-```bash
-npm run preview
-```
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## Deployment to Vercel
+## What technologies are used for this project?
 
-### Option 1: Using Vercel CLI
+This project is built with:
 
-```bash
-npm i -g vercel
-vercel
-```
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-### Option 2: GitHub Integration
+## How can I deploy this project?
 
-1. Push this repository to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Import your GitHub repository
-4. Vercel will auto-detect the Vite configuration
-5. Deploy with default settings
+Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
-### Environment Variables
+## Can I connect a custom domain to my Lovable project?
 
-No environment variables are required for this project.
+Yes, you can!
 
-## Project Structure
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-```
-src/
-├── components/
-│   ├── ComparisonTool.tsx    # Main comparison tool component
-│   ├── FilterPanel.tsx        # Filter controls
-│   ├── InterventionCard.tsx   # Solution card component
-│   └── ui/                    # shadcn UI components
-├── contexts/
-│   └── LanguageContext.tsx    # Language switching (EN/FR)
-├── data/
-│   └── interventions.ts       # Solution data
-├── pages/
-│   └── Index.tsx              # Main page
-└── App.tsx                    # Main app component
-```
-
-## How It Works
-
-1. The comparison tool loads all available interventions from `data/interventions.ts`
-2. Users adjust three sliders to set weights for:
-   - **Effectiveness**: How effective the solution is
-   - **Eco-Friendly**: Environmental safety
-   - **Affordability**: Cost considerations
-3. Solutions are ranked based on the weighted score
-4. Users can filter by category to see specific types of solutions
-5. Each solution can be expanded to view detailed information
-
-## License
-
-Private project
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)

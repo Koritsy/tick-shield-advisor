@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Shield, Leaf, DollarSign, ChevronDown, ChevronUp, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench, Clock } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Shield, Leaf, DollarSign, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench, Clock } from 'lucide-react';
 import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency } from '@/data/interventions';
 
 interface InterventionCardProps {
@@ -50,93 +51,100 @@ const frequencyConfig: Record<ApplicationFrequency, { icon: typeof CheckCircle2;
 };
 
 const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <Badge variant="secondary" className="text-xs font-medium">
-                {intervention.categoryLabel}
-              </Badge>
-              {intervention.evidenceQuality === 'strong' && (
-                <Badge variant="outline" className="text-xs bg-primary/5 text-primary border-primary/20">
-                  Preuves solides
+    <>
+      <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in">
+        <CardHeader className="pb-3">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <Badge variant="secondary" className="text-xs font-medium">
+                  {intervention.categoryLabel}
                 </Badge>
-              )}
-              {intervention.evidenceQuality === 'weak' && (
-                <Badge variant="outline" className="text-xs bg-amber-500/10 text-amber-600 border-amber-500/20">
-                  <AlertTriangle className="h-3 w-3 mr-1" />
-                  Preuves limitées
-                </Badge>
-              )}
+                {intervention.evidenceQuality === 'strong' && (
+                  <Badge variant="outline" className="text-xs bg-primary/5 text-primary border-primary/20">
+                    Preuves solides
+                  </Badge>
+                )}
+                {intervention.evidenceQuality === 'weak' && (
+                  <Badge variant="outline" className="text-xs bg-amber-500/10 text-amber-600 border-amber-500/20">
+                    <AlertTriangle className="h-3 w-3 mr-1" />
+                    Preuves limitées
+                  </Badge>
+                )}
+              </div>
+              <CardTitle className="text-lg font-bold leading-tight">
+                {intervention.nameFr}
+              </CardTitle>
             </div>
-            <CardTitle className="text-lg font-bold leading-tight">
-              {intervention.nameFr}
-            </CardTitle>
+            <div className="flex flex-col items-end gap-1">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-sm">
+                #{rank}
+              </div>
+              <span className="text-xs text-muted-foreground font-medium">
+                Score: {Math.round(score)}
+              </span>
+            </div>
           </div>
-          <div className="flex flex-col items-end gap-1">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-sm">
-              #{rank}
+        </CardHeader>
+
+        <CardContent className="pt-0">
+          <div className="grid grid-cols-3 gap-2 mb-2">
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${effectivenessConfig[intervention.effectiveness].className}`}>
+              <Shield className="h-4 w-4" />
+              <span className="text-xs font-medium">{effectivenessConfig[intervention.effectiveness].label}</span>
             </div>
-            <span className="text-xs text-muted-foreground font-medium">
-              Score: {Math.round(score)}
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${ecoConfig[intervention.environmentalImpact].className}`}>
+              <Leaf className="h-4 w-4" />
+              <span className="text-xs font-medium">{ecoConfig[intervention.environmentalImpact].label}</span>
+            </div>
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${costConfig[intervention.cost].className}`}>
+              <DollarSign className="h-4 w-4" />
+              <span className="text-xs font-medium">{costConfig[intervention.cost].label}</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-2 mb-4">
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${healthConfig[intervention.healthSafety].className}`}>
+              <HeartPulse className="h-4 w-4" />
+              <span className="text-xs font-medium">{healthConfig[intervention.healthSafety].label}</span>
+            </div>
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${easeConfig[intervention.easeOfUse].className}`}>
+              <Wrench className="h-4 w-4" />
+              <span className="text-xs font-medium">{easeConfig[intervention.easeOfUse].label}</span>
+            </div>
+            <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${frequencyConfig[intervention.applicationFrequency].className}`}>
+              <Clock className="h-4 w-4" />
+              <span className="text-xs font-medium">{frequencyConfig[intervention.applicationFrequency].label}</span>
+            </div>
+          </div>
+
+          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+            {intervention.instructions}
+          </p>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-between text-muted-foreground hover:text-foreground"
+            onClick={() => setIsOpen(true)}
+          >
+            <span className="flex items-center gap-2">
+              <Info className="h-4 w-4" />
+              Afficher les détails
             </span>
-          </div>
-        </div>
-      </CardHeader>
+          </Button>
+        </CardContent>
+      </Card>
 
-      <CardContent className="pt-0">
-        <div className="grid grid-cols-3 gap-2 mb-2">
-          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${effectivenessConfig[intervention.effectiveness].className}`}>
-            <Shield className="h-4 w-4" />
-            <span className="text-xs font-medium">{effectivenessConfig[intervention.effectiveness].label}</span>
-          </div>
-          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${ecoConfig[intervention.environmentalImpact].className}`}>
-            <Leaf className="h-4 w-4" />
-            <span className="text-xs font-medium">{ecoConfig[intervention.environmentalImpact].label}</span>
-          </div>
-          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${costConfig[intervention.cost].className}`}>
-            <DollarSign className="h-4 w-4" />
-            <span className="text-xs font-medium">{costConfig[intervention.cost].label}</span>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${healthConfig[intervention.healthSafety].className}`}>
-            <HeartPulse className="h-4 w-4" />
-            <span className="text-xs font-medium">{healthConfig[intervention.healthSafety].label}</span>
-          </div>
-          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${easeConfig[intervention.easeOfUse].className}`}>
-            <Wrench className="h-4 w-4" />
-            <span className="text-xs font-medium">{easeConfig[intervention.easeOfUse].label}</span>
-          </div>
-          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${frequencyConfig[intervention.applicationFrequency].className}`}>
-            <Clock className="h-4 w-4" />
-            <span className="text-xs font-medium">{frequencyConfig[intervention.applicationFrequency].label}</span>
-          </div>
-        </div>
-
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-          {intervention.instructions}
-        </p>
-
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-between text-muted-foreground hover:text-foreground"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          <span className="flex items-center gap-2">
-            <Info className="h-4 w-4" />
-            {isExpanded ? 'Masquer les détails' : 'Afficher les détails'}
-          </span>
-          {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-        </Button>
-
-        {isExpanded && (
-          <div className="mt-4 pt-4 border-t border-border space-y-4 animate-fade-in">
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{intervention.nameFr}</DialogTitle>
+            <DialogDescription>{intervention.categoryLabel}</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 mt-2">
             <DetailSection icon={<Shield className="h-4 w-4 text-primary" />} title="Efficacité" content={intervention.effectivenessDetails}
               badge={intervention.evidenceQuality === 'strong' ? 'Preuves solides' : 'Preuves limitées'}
               badgeVariant={intervention.evidenceQuality === 'strong' ? 'default' : 'secondary'} />
@@ -146,9 +154,9 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
             <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={`${intervention.easeOfUseDetails} ${intervention.availability}`} />
             <DetailSection icon={<Clock className="h-4 w-4 text-primary" />} title="Fréquence d'application" content={intervention.applicationFrequencyDetails} />
           </div>
-        )}
-      </CardContent>
-    </Card>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

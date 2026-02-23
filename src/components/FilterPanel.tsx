@@ -1,8 +1,7 @@
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Shield, Leaf, DollarSign, Filter, HeartPulse, Wrench, Clock, AlertTriangle } from 'lucide-react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Shield, Leaf, DollarSign, Filter, HeartPulse, Wrench, Clock } from 'lucide-react';
 
 interface FilterPanelProps {
   effectivenessWeight: number;
@@ -28,24 +27,6 @@ const categories = [
   { id: 'other', label: 'Autre' },
 ];
 
-// Filters where evidence is generally weak/insufficient
-const weakEvidenceFilters = new Set(['ecoWeight', 'healthWeight', 'easeWeight', 'frequencyWeight']);
-
-const WarningIcon = ({ filterKey }: { filterKey: string }) => {
-  if (!weakEvidenceFilters.has(filterKey)) return null;
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
-        </TooltipTrigger>
-        <TooltipContent side="top" className="max-w-[220px] text-xs">
-          Preuves scientifiques insuffisantes pour ce critère — les scores sont basés sur des estimations.
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-};
 
 const FilterPanel = ({
   effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight,
@@ -81,7 +62,6 @@ const FilterPanel = ({
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Leaf className="h-4 w-4 text-eco-safe" />
               Écologique
-              <WarningIcon filterKey="ecoWeight" />
             </Label>
             <span className="text-sm font-semibold text-primary">{ecoWeight}%</span>
           </div>
@@ -106,7 +86,6 @@ const FilterPanel = ({
             <Label className="flex items-center gap-2 text-sm font-medium">
               <HeartPulse className="h-4 w-4 text-eco-safe" />
               Santé et sécurité
-              <WarningIcon filterKey="healthWeight" />
             </Label>
             <span className="text-sm font-semibold text-primary">{healthWeight}%</span>
           </div>
@@ -119,7 +98,6 @@ const FilterPanel = ({
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Wrench className="h-4 w-4 text-primary" />
               Facilité d'utilisation
-              <WarningIcon filterKey="easeWeight" />
             </Label>
             <span className="text-sm font-semibold text-primary">{easeWeight}%</span>
           </div>
@@ -132,7 +110,6 @@ const FilterPanel = ({
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Clock className="h-4 w-4 text-primary" />
               Fréquence d'application
-              <WarningIcon filterKey="frequencyWeight" />
             </Label>
             <span className="text-sm font-semibold text-primary">{frequencyWeight}%</span>
           </div>

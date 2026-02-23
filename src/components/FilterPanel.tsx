@@ -1,7 +1,8 @@
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Shield, Leaf, DollarSign, Filter, HeartPulse, Wrench } from 'lucide-react';
+import { Shield, Leaf, DollarSign, Filter, HeartPulse, Wrench, Clock, AlertTriangle } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface FilterPanelProps {
   effectivenessWeight: number;
@@ -9,11 +10,13 @@ interface FilterPanelProps {
   costWeight: number;
   healthWeight: number;
   easeWeight: number;
+  frequencyWeight: number;
   onEffectivenessChange: (value: number) => void;
   onEcoChange: (value: number) => void;
   onCostChange: (value: number) => void;
   onHealthChange: (value: number) => void;
   onEaseChange: (value: number) => void;
+  onFrequencyChange: (value: number) => void;
   selectedCategories: string[];
   onCategoryToggle: (category: string) => void;
 }
@@ -25,9 +28,28 @@ const categories = [
   { id: 'other', label: 'Autre' },
 ];
 
+// Filters where evidence is generally weak/insufficient
+const weakEvidenceFilters = new Set(['ecoWeight', 'healthWeight', 'easeWeight', 'frequencyWeight']);
+
+const WarningIcon = ({ filterKey }: { filterKey: string }) => {
+  if (!weakEvidenceFilters.has(filterKey)) return null;
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+        </TooltipTrigger>
+        <TooltipContent side="top" className="max-w-[220px] text-xs">
+          Preuves scientifiques insuffisantes pour ce critère — les scores sont basés sur des estimations.
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+
 const FilterPanel = ({
-  effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight,
-  onEffectivenessChange, onEcoChange, onCostChange, onHealthChange, onEaseChange,
+  effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight,
+  onEffectivenessChange, onEcoChange, onCostChange, onHealthChange, onEaseChange, onFrequencyChange,
   selectedCategories, onCategoryToggle,
 }: FilterPanelProps) => {
   return (
@@ -59,6 +81,7 @@ const FilterPanel = ({
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Leaf className="h-4 w-4 text-eco-safe" />
               Écologique
+              <WarningIcon filterKey="ecoWeight" />
             </Label>
             <span className="text-sm font-semibold text-primary">{ecoWeight}%</span>
           </div>
@@ -83,6 +106,7 @@ const FilterPanel = ({
             <Label className="flex items-center gap-2 text-sm font-medium">
               <HeartPulse className="h-4 w-4 text-eco-safe" />
               Santé et sécurité
+              <WarningIcon filterKey="healthWeight" />
             </Label>
             <span className="text-sm font-semibold text-primary">{healthWeight}%</span>
           </div>
@@ -95,11 +119,25 @@ const FilterPanel = ({
             <Label className="flex items-center gap-2 text-sm font-medium">
               <Wrench className="h-4 w-4 text-primary" />
               Facilité d'utilisation
+              <WarningIcon filterKey="easeWeight" />
             </Label>
             <span className="text-sm font-semibold text-primary">{easeWeight}%</span>
           </div>
           <Slider value={[easeWeight]} onValueChange={([v]) => onEaseChange(v)} max={100} step={5} className="w-full" />
           <p className="text-xs text-muted-foreground">Quelle importance accordez-vous à la simplicité de mise en œuvre?</p>
+        </div>
+
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <Label className="flex items-center gap-2 text-sm font-medium">
+              <Clock className="h-4 w-4 text-primary" />
+              Fréquence d'application
+              <WarningIcon filterKey="frequencyWeight" />
+            </Label>
+            <span className="text-sm font-semibold text-primary">{frequencyWeight}%</span>
+          </div>
+          <Slider value={[frequencyWeight]} onValueChange={([v]) => onFrequencyChange(v)} max={100} step={5} className="w-full" />
+          <p className="text-xs text-muted-foreground">Quelle importance accordez-vous à une faible fréquence d'application?</p>
         </div>
       </div>
 

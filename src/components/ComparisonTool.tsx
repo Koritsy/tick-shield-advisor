@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import FilterPanel from './FilterPanel';
 import InterventionCard from './InterventionCard';
 import { interventions } from '@/data/interventions';
-import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel } from '@/data/interventions';
+import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency } from '@/data/interventions';
 
 const effectivenessScores: Record<EffectivenessLevel, number> = {
   high: 100, medium: 60, low: 30, unknown: 40,
@@ -19,6 +19,9 @@ const healthSafetyScores: Record<HealthSafetyLevel, number> = {
 const easeOfUseScores: Record<EaseOfUseLevel, number> = {
   easy: 100, medium: 60, hard: 20,
 };
+const frequencyScores: Record<ApplicationFrequency, number> = {
+  once: 100, seasonal: 75, regular: 40, frequent: 15,
+};
 
 const calculateScore = (
   intervention: Intervention,
@@ -27,15 +30,17 @@ const calculateScore = (
   costWeight: number,
   healthWeight: number,
   easeWeight: number,
+  frequencyWeight: number,
 ): number => {
-  const totalWeight = effectivenessWeight + ecoWeight + costWeight + healthWeight + easeWeight;
+  const totalWeight = effectivenessWeight + ecoWeight + costWeight + healthWeight + easeWeight + frequencyWeight;
   if (totalWeight === 0) return 50;
   const score =
     effectivenessScores[intervention.effectiveness] * (effectivenessWeight / totalWeight) +
     ecoScores[intervention.environmentalImpact] * (ecoWeight / totalWeight) +
     costScores[intervention.cost] * (costWeight / totalWeight) +
     healthSafetyScores[intervention.healthSafety] * (healthWeight / totalWeight) +
-    easeOfUseScores[intervention.easeOfUse] * (easeWeight / totalWeight);
+    easeOfUseScores[intervention.easeOfUse] * (easeWeight / totalWeight) +
+    frequencyScores[intervention.applicationFrequency] * (frequencyWeight / totalWeight);
   return score;
 };
 
@@ -45,6 +50,7 @@ const ComparisonTool = () => {
   const [costWeight, setCostWeight] = useState(20);
   const [healthWeight, setHealthWeight] = useState(30);
   const [easeWeight, setEaseWeight] = useState(20);
+  const [frequencyWeight, setFrequencyWeight] = useState(20);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([
     'personal', 'landscaping', 'wildlife', 'other',
   ]);
@@ -60,10 +66,10 @@ const ComparisonTool = () => {
       .filter((intervention) => selectedCategories.includes(intervention.category))
       .map((intervention) => ({
         intervention,
-        score: calculateScore(intervention, effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight),
+        score: calculateScore(intervention, effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight),
       }))
       .sort((a, b) => b.score - a.score);
-  }, [effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, selectedCategories]);
+  }, [effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight, selectedCategories]);
 
   return (
     <section id="compare" className="py-12 md:py-16 gradient-nature">
@@ -86,11 +92,13 @@ const ComparisonTool = () => {
                 costWeight={costWeight}
                 healthWeight={healthWeight}
                 easeWeight={easeWeight}
+                frequencyWeight={frequencyWeight}
                 onEffectivenessChange={setEffectivenessWeight}
                 onEcoChange={setEcoWeight}
                 onCostChange={setCostWeight}
                 onHealthChange={setHealthWeight}
                 onEaseChange={setEaseWeight}
+                onFrequencyChange={setFrequencyWeight}
                 selectedCategories={selectedCategories}
                 onCategoryToggle={handleCategoryToggle}
               />

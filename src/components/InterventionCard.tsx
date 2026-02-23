@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Shield, Leaf, DollarSign, ChevronDown, ChevronUp, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench } from 'lucide-react';
-import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel } from '@/data/interventions';
+import { Shield, Leaf, DollarSign, ChevronDown, ChevronUp, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench, Clock } from 'lucide-react';
+import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency } from '@/data/interventions';
 
 interface InterventionCardProps {
   intervention: Intervention;
@@ -42,6 +42,13 @@ const easeConfig: Record<EaseOfUseLevel, { icon: typeof CheckCircle2; label: str
   hard: { icon: XCircle, label: 'Difficile', className: 'text-eco-risk bg-eco-risk/10' },
 };
 
+const frequencyConfig: Record<ApplicationFrequency, { icon: typeof CheckCircle2; label: string; className: string }> = {
+  once: { icon: CheckCircle2, label: 'Une fois', className: 'text-eco-safe bg-eco-safe/10' },
+  seasonal: { icon: AlertTriangle, label: 'Saisonnier', className: 'text-effectiveness-medium bg-effectiveness-medium/10' },
+  regular: { icon: AlertTriangle, label: 'Régulier', className: 'text-eco-caution bg-eco-caution/10' },
+  frequent: { icon: XCircle, label: 'Fréquent', className: 'text-eco-risk bg-eco-risk/10' },
+};
+
 const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -57,6 +64,12 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
               {intervention.evidenceQuality === 'strong' && (
                 <Badge variant="outline" className="text-xs bg-primary/5 text-primary border-primary/20">
                   Preuves solides
+                </Badge>
+              )}
+              {intervention.evidenceQuality === 'weak' && (
+                <Badge variant="outline" className="text-xs bg-amber-500/10 text-amber-600 border-amber-500/20">
+                  <AlertTriangle className="h-3 w-3 mr-1" />
+                  Preuves limitées
                 </Badge>
               )}
             </div>
@@ -76,7 +89,6 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
       </CardHeader>
 
       <CardContent className="pt-0">
-        {/* Métriques rapides */}
         <div className="grid grid-cols-3 gap-2 mb-2">
           <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${effectivenessConfig[intervention.effectiveness].className}`}>
             <Shield className="h-4 w-4" />
@@ -91,7 +103,7 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
             <span className="text-xs font-medium">{costConfig[intervention.cost].label}</span>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2 mb-4">
+        <div className="grid grid-cols-3 gap-2 mb-4">
           <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${healthConfig[intervention.healthSafety].className}`}>
             <HeartPulse className="h-4 w-4" />
             <span className="text-xs font-medium">{healthConfig[intervention.healthSafety].label}</span>
@@ -99,6 +111,10 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
           <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${easeConfig[intervention.easeOfUse].className}`}>
             <Wrench className="h-4 w-4" />
             <span className="text-xs font-medium">{easeConfig[intervention.easeOfUse].label}</span>
+          </div>
+          <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${frequencyConfig[intervention.applicationFrequency].className}`}>
+            <Clock className="h-4 w-4" />
+            <span className="text-xs font-medium">{frequencyConfig[intervention.applicationFrequency].label}</span>
           </div>
         </div>
 
@@ -128,6 +144,7 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
             <DetailSection icon={<HeartPulse className="h-4 w-4 text-primary" />} title="Santé et sécurité" content={intervention.healthRisks} />
             <DetailSection icon={<DollarSign className="h-4 w-4 text-primary" />} title="Détails des coûts" content={`${intervention.costDetails}. Investissement annuel : ${intervention.annualInvestment}`} />
             <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={`${intervention.easeOfUseDetails} ${intervention.availability}`} />
+            <DetailSection icon={<Clock className="h-4 w-4 text-primary" />} title="Fréquence d'application" content={intervention.applicationFrequencyDetails} />
           </div>
         )}
       </CardContent>

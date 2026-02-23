@@ -4,6 +4,7 @@ export type CostLevel = 'low' | 'medium' | 'high';
 export type HealthSafetyLevel = 'safe' | 'caution' | 'risk';
 export type EaseOfUseLevel = 'easy' | 'medium' | 'hard';
 export type EvidenceQuality = 'strong' | 'weak';
+export type ApplicationFrequency = 'once' | 'seasonal' | 'regular' | 'frequent';
 
 export interface Intervention {
   id: string;
@@ -25,6 +26,8 @@ export interface Intervention {
   healthSafety: HealthSafetyLevel;
   healthRisks: string;
   availability: string;
+  applicationFrequency: ApplicationFrequency;
+  applicationFrequencyDetails: string;
 }
 
 export const interventions: Intervention[] = [
@@ -48,6 +51,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'safe',
     healthRisks: 'Effet protecteur — aucun risque.',
     availability: 'Toujours disponible — changement de comportement uniquement.',
+    applicationFrequency: 'frequent',
+    applicationFrequencyDetails: 'À chaque sortie extérieure.',
   },
   {
     id: 'deet-repellent',
@@ -69,6 +74,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'safe',
     healthRisks: 'Icaridine : risque très faible. DEET : rare irritation cutanée/oculaire, effets neurologiques extrêmement rares.',
     availability: 'Facilement disponible en pharmacie, magasins de plein air et en ligne.',
+    applicationFrequency: 'frequent',
+    applicationFrequencyDetails: 'Réappliquer toutes les quelques heures lors d\'une exposition.',
   },
   {
     id: 'protective-clothing',
@@ -90,6 +97,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Peut augmenter le risque de stress thermique.',
     availability: 'La plupart des gens possèdent déjà des vêtements appropriés.',
+    applicationFrequency: 'frequent',
+    applicationFrequencyDetails: 'À chaque sortie extérieure.',
   },
   {
     id: 'self-check',
@@ -111,6 +120,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'safe',
     healthRisks: 'Aucun risque — mesure protectrice.',
     availability: 'Toujours disponible — peut être difficile en camping.',
+    applicationFrequency: 'frequent',
+    applicationFrequencyDetails: 'Après chaque activité extérieure.',
   },
   {
     id: 'permethrin-clothing',
@@ -132,6 +143,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Faible impact sur la santé. Peut augmenter le risque de stress thermique.',
     availability: 'Disponible dans les magasins de plein air et en ligne.',
+    applicationFrequency: 'seasonal',
+    applicationFrequencyDetails: 'Remplacement saisonnier des vêtements traités.',
   },
   {
     id: 'natural-repellents',
@@ -153,6 +166,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Certains peuvent causer des irritations cutanées, de la photosensibilité ou des allergies.',
     availability: 'Disponible en pharmacie, magasins de santé naturelle, magasins de plein air.',
+    applicationFrequency: 'frequent',
+    applicationFrequencyDetails: 'Réapplication fréquente nécessaire (courte durée).',
   },
   {
     id: 'wood-chip-border',
@@ -174,6 +189,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Risques liés au travail physique, stress thermique lors de l\'installation.',
     availability: 'Disponible dans les centres de jardinage et quincailleries.',
+    applicationFrequency: 'seasonal',
+    applicationFrequencyDetails: 'Renouveler annuellement ou au besoin.',
   },
   {
     id: 'gravel-border',
@@ -195,6 +212,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Risques liés au travail physique, stress thermique lors de l\'installation.',
     availability: 'Disponible dans les centres de jardinage et fournisseurs d\'aménagement paysager.',
+    applicationFrequency: 'once',
+    applicationFrequencyDetails: 'Installation unique, entretien minimal.',
   },
   {
     id: 'pesticides',
@@ -216,6 +235,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'risk',
     healthRisks: 'Certains produits sont toxiques pour les humains. Les chats sont particulièrement sensibles à la perméthrine.',
     availability: 'Produits à faire soi-même disponibles en quincaillerie. Application professionnelle interdite au Québec.',
+    applicationFrequency: 'seasonal',
+    applicationFrequencyDetails: '2 traitements par saison (printemps et été).',
   },
   {
     id: 'natural-pesticides',
@@ -237,6 +258,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Certains peuvent causer des irritations cutanées ou de la photosensibilité.',
     availability: 'Certains disponibles en ligne, d\'autres difficiles à trouver.',
+    applicationFrequency: 'regular',
+    applicationFrequencyDetails: 'Réapplication fréquente nécessaire pour maintenir l\'efficacité.',
   },
   {
     id: 'biological-agents',
@@ -258,6 +281,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'safe',
     healthRisks: 'Non toxique selon l\'EPA et Agriculture Canada.',
     availability: 'Certains produits nécessitent des permis. Le Bacillus thuringiensis est disponible en magasin.',
+    applicationFrequency: 'regular',
+    applicationFrequencyDetails: 'Réappliquer toutes les 2-3 semaines.',
   },
   {
     id: 'yard-maintenance',
@@ -279,6 +304,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Risques liés au travail physique, exposition à l\'herbe à puce, morsures de tiques pendant le travail.',
     availability: 'Toujours disponible.',
+    applicationFrequency: 'regular',
+    applicationFrequencyDetails: 'Tonte hebdomadaire, ramassage des feuilles en mars et juin.',
   },
   {
     id: 'firewood-storage',
@@ -300,6 +327,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Risques liés au travail physique lors du déplacement du bois.',
     availability: 'Supports disponibles dans les quincailleries.',
+    applicationFrequency: 'once',
+    applicationFrequencyDetails: 'Modification unique de l\'entreposage.',
   },
   {
     id: 'fencing',
@@ -321,6 +350,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Risques d\'installation, stress thermique pendant les travaux.',
     availability: 'Divers matériaux et entrepreneurs disponibles.',
+    applicationFrequency: 'once',
+    applicationFrequencyDetails: 'Installation unique, entretien minimal.',
   },
   {
     id: 'deer-repellents',
@@ -342,6 +373,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'caution',
     healthRisks: 'Les produits à base de sang/urine ne doivent pas être utilisés sur les plantes comestibles.',
     availability: 'Répulsifs commerciaux disponibles dans les centres de jardinage.',
+    applicationFrequency: 'regular',
+    applicationFrequencyDetails: 'Répéter toutes les 6-8 semaines et après la pluie.',
   },
   {
     id: 'bait-box',
@@ -363,6 +396,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'risk',
     healthRisks: 'Le fipronil peut causer des effets indésirables.',
     availability: 'Non disponible au Canada.',
+    applicationFrequency: 'seasonal',
+    applicationFrequencyDetails: 'Placer au printemps et au milieu de l\'été.',
   },
   {
     id: 'tick-tubes',
@@ -384,6 +419,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'safe',
     healthRisks: 'Faible impact de la perméthrine sur la santé humaine.',
     availability: 'Disponible dans les magasins de plein air et quincailleries.',
+    applicationFrequency: 'seasonal',
+    applicationFrequencyDetails: 'Placer au printemps et au milieu de l\'été.',
   },
   {
     id: 'rodent-elimination',
@@ -405,6 +442,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'risk',
     healthRisks: 'Risque d\'infection par des souris malades. Risque de blessure par les pièges. Risque de poison pour les animaux et les enfants.',
     availability: 'Pièges largement disponibles. Divers exterminateurs disponibles.',
+    applicationFrequency: 'regular',
+    applicationFrequencyDetails: 'Entretien régulier des pièges nécessaire.',
   },
   {
     id: 'pet-treatment',
@@ -426,6 +465,8 @@ export const interventions: Intervention[] = [
     healthSafety: 'safe',
     healthRisks: 'Généralement sûr pour les mammifères, y compris les humains.',
     availability: 'Disponible sur ordonnance dans les cliniques vétérinaires.',
+    applicationFrequency: 'regular',
+    applicationFrequencyDetails: 'Répéter toutes les 4-12 semaines selon le produit.',
   },
 ];
 

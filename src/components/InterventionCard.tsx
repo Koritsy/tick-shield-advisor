@@ -155,10 +155,11 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
           </DialogHeader>
           <div className="space-y-4 mt-2">
             <DetailSection icon={<Shield className="h-4 w-4 text-primary" />} title="Efficacité" content={intervention.effectivenessDetails}
-              badge={intervention.evidenceQuality === 'strong' ? 'Preuves solides' : 'Preuves limitées'}
-              badgeVariant={intervention.evidenceQuality === 'strong' ? 'default' : 'secondary'} />
-            <DetailSection icon={<Leaf className="h-4 w-4 text-primary" />} title="Impact environnemental" content={intervention.environmentalDetails} />
-            <DetailSection icon={<HeartPulse className="h-4 w-4 text-primary" />} title="Santé et sécurité" content={intervention.healthRisks} />
+              evidenceQuality={intervention.effectivenessEvidence} />
+            <DetailSection icon={<Leaf className="h-4 w-4 text-primary" />} title="Impact environnemental" content={intervention.environmentalDetails}
+              evidenceQuality={intervention.environmentalEvidence} />
+            <DetailSection icon={<HeartPulse className="h-4 w-4 text-primary" />} title="Santé et sécurité" content={intervention.healthRisks}
+              evidenceQuality={intervention.healthEvidence} />
             <DetailSection icon={<DollarSign className="h-4 w-4 text-primary" />} title="Détails des coûts" content={`${intervention.costDetails}. Investissement annuel : ${intervention.annualInvestment}`} />
             <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={`${intervention.easeOfUseDetails} ${intervention.availability}`} />
             <DetailSection icon={<Clock className="h-4 w-4 text-primary" />} title="Fréquence d'application" content={intervention.applicationFrequencyDetails} />
@@ -169,14 +170,25 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
   );
 };
 
-const DetailSection = ({ icon, title, content, badge, badgeVariant = 'secondary' }: {
-  icon: React.ReactNode; title: string; content: string; badge?: string; badgeVariant?: 'default' | 'secondary';
+const DetailSection = ({ icon, title, content, evidenceQuality }: {
+  icon: React.ReactNode; title: string; content: string; evidenceQuality?: AspectEvidenceQuality;
 }) => (
   <div className="space-y-1">
     <div className="flex items-center gap-2">
       {icon}
       <span className="text-sm font-semibold text-foreground">{title}</span>
-      {badge && <Badge variant={badgeVariant} className="text-xs ml-auto">{badge}</Badge>}
+      {evidenceQuality && evidenceQuality !== 'na' && (
+        <Badge
+          variant={evidenceQuality === 'strong' ? 'default' : 'secondary'}
+          className={`text-xs ml-auto ${evidenceQuality === 'weak' ? 'bg-amber-500/10 text-amber-600 border-amber-500/20' : ''}`}
+        >
+          {evidenceQuality === 'strong' ? (
+            <><CheckCircle2 className="h-3 w-3 mr-1" />Preuves solides</>
+          ) : (
+            <><AlertTriangle className="h-3 w-3 mr-1" />Preuves limitées</>
+          )}
+        </Badge>
+      )}
     </div>
     <p className="text-sm text-muted-foreground pl-6">{content}</p>
   </div>

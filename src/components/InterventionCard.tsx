@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Shield, Leaf, DollarSign, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench, Clock } from 'lucide-react';
-import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency } from '@/data/interventions';
+import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency, AspectEvidenceQuality } from '@/data/interventions';
 
 interface InterventionCardProps {
   intervention: Intervention;
@@ -48,6 +48,12 @@ const frequencyConfig: Record<ApplicationFrequency, { icon: typeof CheckCircle2;
   seasonal: { icon: AlertTriangle, label: 'Saisonnier', className: 'text-effectiveness-medium bg-effectiveness-medium/10' },
   regular: { icon: AlertTriangle, label: 'Régulier', className: 'text-eco-caution bg-eco-caution/10' },
   frequent: { icon: XCircle, label: 'Fréquent', className: 'text-eco-risk bg-eco-risk/10' },
+};
+
+const EvidenceIcon = ({ quality }: { quality: AspectEvidenceQuality }) => {
+  if (quality === 'na') return null;
+  if (quality === 'strong') return <CheckCircle2 className="h-3 w-3 text-emerald-600 shrink-0" />;
+  return <AlertTriangle className="h-3 w-3 text-amber-500 shrink-0" />;
 };
 
 const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) => {
@@ -95,10 +101,12 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
             <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${effectivenessConfig[intervention.effectiveness].className}`}>
               <Shield className="h-4 w-4" />
               <span className="text-xs font-medium">{effectivenessConfig[intervention.effectiveness].label}</span>
+              <EvidenceIcon quality={intervention.effectivenessEvidence} />
             </div>
             <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${ecoConfig[intervention.environmentalImpact].className}`}>
               <Leaf className="h-4 w-4" />
               <span className="text-xs font-medium">{ecoConfig[intervention.environmentalImpact].label}</span>
+              <EvidenceIcon quality={intervention.environmentalEvidence} />
             </div>
             <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${costConfig[intervention.cost].className}`}>
               <DollarSign className="h-4 w-4" />
@@ -109,6 +117,7 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
             <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${healthConfig[intervention.healthSafety].className}`}>
               <HeartPulse className="h-4 w-4" />
               <span className="text-xs font-medium">{healthConfig[intervention.healthSafety].label}</span>
+              <EvidenceIcon quality={intervention.healthEvidence} />
             </div>
             <div className={`flex items-center gap-1.5 px-3 py-2 rounded-lg ${easeConfig[intervention.easeOfUse].className}`}>
               <Wrench className="h-4 w-4" />

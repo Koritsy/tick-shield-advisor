@@ -1,6 +1,9 @@
 import { useState, useMemo } from 'react';
 import FilterPanel from './FilterPanel';
 import InterventionCard from './InterventionCard';
+import ComparisonModal from './ComparisonModal';
+import { Button } from '@/components/ui/button';
+import { GitCompareArrows, X } from 'lucide-react';
 import { interventions } from '@/data/interventions';
 import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency } from '@/data/interventions';
 
@@ -55,11 +58,25 @@ const ComparisonTool = () => {
     'personal', 'landscaping', 'wildlife', 'other',
   ]);
 
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [compareOpen, setCompareOpen] = useState(false);
+
   const handleCategoryToggle = (category: string) => {
     setSelectedCategories((prev) =>
       prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
     );
   };
+
+  const handleToggleCompare = (id: string) => {
+    setCompareIds((prev) =>
+      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
+    );
+  };
+
+  const compareInterventions = useMemo(() =>
+    interventions.filter((i) => compareIds.includes(i.id)),
+    [compareIds]
+  );
 
   const rankedInterventions = useMemo(() => {
     return interventions
@@ -119,6 +136,8 @@ const ComparisonTool = () => {
                   intervention={intervention}
                   score={score}
                   rank={index + 1}
+                  isComparing={compareIds.includes(intervention.id)}
+                  onToggleCompare={handleToggleCompare}
                 />
               ))}
             </div>
@@ -131,6 +150,21 @@ const ComparisonTool = () => {
           </div>
         </div>
       </div>
+
+      {compareIds.length >= 2 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-primary text-primary-foreground px-6 py-3 rounded-full shadow-lg">
+          <span className="text-sm font-medium">{compareIds.length} solutions sélectionnées</span>
+          <Button size="sm" variant="secondary" onClick={() => setCompareOpen(true)}>
+            <GitCompareArrows className="h-4 w-4 mr-1" />
+            Comparer
+          </Button>
+          <Button size="icon" variant="ghost" className="h-7 w-7 text-primary-foreground hover:text-primary-foreground/80 hover:bg-primary-foreground/10" onClick={() => setCompareIds([])}>
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+
+      <ComparisonModal open={compareOpen} onOpenChange={setCompareOpen} interventions={compareInterventions} />
     </section>
   );
 };

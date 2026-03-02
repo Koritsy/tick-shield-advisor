@@ -10,6 +10,8 @@ interface InterventionCardProps {
   intervention: Intervention;
   score: number;
   rank: number;
+  isComparing?: boolean;
+  onToggleCompare?: (id: string) => void;
 }
 
 const effectivenessConfig: Record<EffectivenessLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
@@ -56,7 +58,7 @@ const EvidenceIcon = ({ quality }: { quality: AspectEvidenceQuality }) => {
   return <AlertTriangle className="h-3 w-3 text-amber-500 shrink-0" />;
 };
 
-const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) => {
+const InterventionCard = ({ intervention, score, rank, isComparing = false, onToggleCompare }: InterventionCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -133,17 +135,32 @@ const InterventionCard = ({ intervention, score, rank }: InterventionCardProps) 
             {intervention.instructions}
           </p>
 
-          <Button
-            variant="ghost"
-            size="sm"
-            className="w-full justify-between text-muted-foreground hover:text-foreground"
-            onClick={() => setIsOpen(true)}
-          >
-            <span className="flex items-center gap-2">
-              <Info className="h-4 w-4" />
-              Afficher les détails
-            </span>
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex-1 justify-between text-muted-foreground hover:text-foreground"
+              onClick={() => setIsOpen(true)}
+            >
+              <span className="flex items-center gap-2">
+                <Info className="h-4 w-4" />
+                Détails
+              </span>
+            </Button>
+            {onToggleCompare && (
+              <Button
+                variant={isComparing ? "default" : "outline"}
+                size="sm"
+                className="flex-1"
+                onClick={() => onToggleCompare(intervention.id)}
+              >
+                <span className="flex items-center gap-2">
+                  {isComparing ? <CheckCircle2 className="h-4 w-4" /> : <Shield className="h-4 w-4" />}
+                  {isComparing ? 'Sélectionné' : 'Comparer'}
+                </span>
+              </Button>
+            )}
+          </div>
         </CardContent>
       </Card>
 

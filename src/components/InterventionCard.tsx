@@ -180,6 +180,7 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
             <DetailSection icon={<DollarSign className="h-4 w-4 text-primary" />} title="Détails des coûts" content={`${intervention.costDetails}. Investissement annuel : ${intervention.annualInvestment}`} />
             <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={`${intervention.easeOfUseDetails} ${intervention.availability}`} />
             <DetailSection icon={<Clock className="h-4 w-4 text-primary" />} title="Fréquence d'application" content={intervention.applicationFrequencyDetails} />
+            <DetailSection icon={<Info className="h-4 w-4 text-primary" />} title="Disponibilité" content={intervention.availability} />
           </div>
         </DialogContent>
       </Dialog>

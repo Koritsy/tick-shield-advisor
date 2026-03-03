@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { Shield, Leaf, DollarSign, HeartPulse, Wrench, Clock, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Shield, Leaf, DollarSign, HeartPulse, Wrench, Clock, CheckCircle2, AlertTriangle, ChevronDown } from 'lucide-react';
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table';
 import type { Intervention, AspectEvidenceQuality } from '@/data/interventions';
 
@@ -40,19 +41,31 @@ const labels: Record<string, string> = {
 };
 
 const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalProps) => {
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
+
   if (interventions.length === 0) return null;
+
+  const toggleRow = (label: string) => {
+    setExpandedRows(prev => {
+      const next = new Set(prev);
+      if (next.has(label)) next.delete(label);
+      else next.add(label);
+      return next;
+    });
+  };
 
   const rows: {
     label: string;
     icon: React.ReactNode;
     getValue: (i: Intervention) => { level: string; evidence?: AspectEvidenceQuality };
+    getDetails: (i: Intervention) => string;
   }[] = [
-    { label: 'Efficacité', icon: <Shield className="h-4 w-4" />, getValue: (i) => ({ level: i.effectiveness, evidence: i.effectivenessEvidence }) },
-    { label: 'Impact éco.', icon: <Leaf className="h-4 w-4" />, getValue: (i) => ({ level: i.environmentalImpact, evidence: i.environmentalEvidence }) },
-    { label: 'Coût', icon: <DollarSign className="h-4 w-4" />, getValue: (i) => ({ level: i.cost }) },
-    { label: 'Santé', icon: <HeartPulse className="h-4 w-4" />, getValue: (i) => ({ level: i.healthSafety, evidence: i.healthEvidence }) },
-    { label: 'Facilité', icon: <Wrench className="h-4 w-4" />, getValue: (i) => ({ level: i.easeOfUse }) },
-    { label: 'Fréquence', icon: <Clock className="h-4 w-4" />, getValue: (i) => ({ level: i.applicationFrequency }) },
+    { label: 'Efficacité', icon: <Shield className="h-4 w-4" />, getValue: (i) => ({ level: i.effectiveness, evidence: i.effectivenessEvidence }), getDetails: (i) => i.effectivenessDetails },
+    { label: 'Impact éco.', icon: <Leaf className="h-4 w-4" />, getValue: (i) => ({ level: i.environmentalImpact, evidence: i.environmentalEvidence }), getDetails: (i) => i.environmentalDetails },
+    { label: 'Coût', icon: <DollarSign className="h-4 w-4" />, getValue: (i) => ({ level: i.cost }), getDetails: (i) => `${i.costDetails}. Investissement annuel : ${i.annualInvestment}` },
+    { label: 'Santé', icon: <HeartPulse className="h-4 w-4" />, getValue: (i) => ({ level: i.healthSafety, evidence: i.healthEvidence }), getDetails: (i) => i.healthRisks },
+    { label: 'Facilité', icon: <Wrench className="h-4 w-4" />, getValue: (i) => ({ level: i.easeOfUse }), getDetails: (i) => i.easeOfUseDetails },
+    { label: 'Fréquence', icon: <Clock className="h-4 w-4" />, getValue: (i) => ({ level: i.applicationFrequency }), getDetails: (i) => i.applicationFrequencyDetails },
   ];
 
   return (
@@ -61,7 +74,7 @@ const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalP
         <DialogHeader>
           <DialogTitle>Comparaison des solutions</DialogTitle>
           <DialogDescription>
-            {interventions.length} solutions sélectionnées
+            {interventions.length} solutions sélectionnées — cliquez sur un critère pour voir les détails
           </DialogDescription>
         </DialogHeader>
         <div className="overflow-x-auto mt-4">
@@ -90,27 +103,47 @@ const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalP
                   </TableCell>
                 ))}
               </TableRow>
-              {rows.map((row) => (
-                <TableRow key={row.label}>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      {row.icon}
-                      <span className="text-xs font-medium">{row.label}</span>
-                    </div>
-                  </TableCell>
-                  {interventions.map((i) => {
-                    const { level, evidence } = row.getValue(i);
-                    return (
-                      <TableCell key={i.id} className="text-center">
-                        <Badge variant="outline" className={`text-xs ${levelColors[level] || ''}`}>
-                          {labels[level] || level}
-                          {evidence && <EvidenceBadge quality={evidence} />}
-                        </Badge>
+              {rows.map((row) => {
+                const isExpanded = expandedRows.has(row.label);
+                return (
+                  <>
+                    <TableRow
+                      key={row.label}
+                      className="cursor-pointer hover:bg-muted/50 transition-colors"
+                      onClick={() => toggleRow(row.label)}
+                    >
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          {row.icon}
+                          <span className="text-xs font-medium">{row.label}</span>
+                          <ChevronDown className={`h-3 w-3 text-muted-foreground transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                        </div>
                       </TableCell>
-                    );
-                  })}
-                </TableRow>
-              ))}
+                      {interventions.map((i) => {
+                        const { level, evidence } = row.getValue(i);
+                        return (
+                          <TableCell key={i.id} className="text-center">
+                            <Badge variant="outline" className={`text-xs ${levelColors[level] || ''}`}>
+                              {labels[level] || level}
+                              {evidence && <EvidenceBadge quality={evidence} />}
+                            </Badge>
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                    {isExpanded && (
+                      <TableRow key={`${row.label}-details`} className="bg-muted/30">
+                        <TableCell className="text-xs text-muted-foreground italic">Détails</TableCell>
+                        {interventions.map((i) => (
+                          <TableCell key={i.id} className="text-xs text-muted-foreground">
+                            {row.getDetails(i)}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    )}
+                  </>
+                );
+              })}
             </TableBody>
           </Table>
         </div>

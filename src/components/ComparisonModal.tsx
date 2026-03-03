@@ -42,7 +42,7 @@ const labels: Record<string, string> = {
 const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalProps) => {
   if (interventions.length === 0) return null;
 
-  const levelRows: {
+  const rows: {
     label: string;
     icon: React.ReactNode;
     getValue: (i: Intervention) => { level: string; evidence?: AspectEvidenceQuality };
@@ -53,20 +53,6 @@ const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalP
     { label: 'Santé', icon: <HeartPulse className="h-4 w-4" />, getValue: (i) => ({ level: i.healthSafety, evidence: i.healthEvidence }) },
     { label: 'Facilité', icon: <Wrench className="h-4 w-4" />, getValue: (i) => ({ level: i.easeOfUse }) },
     { label: 'Fréquence', icon: <Clock className="h-4 w-4" />, getValue: (i) => ({ level: i.applicationFrequency }) },
-  ];
-
-  const detailRows: {
-    label: string;
-    icon: React.ReactNode;
-    getValue: (i: Intervention) => string;
-  }[] = [
-    { label: 'Détails efficacité', icon: <Shield className="h-4 w-4" />, getValue: (i) => i.effectivenessDetails },
-    { label: 'Détails environnement', icon: <Leaf className="h-4 w-4" />, getValue: (i) => i.environmentalDetails },
-    { label: 'Risques santé', icon: <HeartPulse className="h-4 w-4" />, getValue: (i) => i.healthRisks },
-    { label: 'Détails coût', icon: <DollarSign className="h-4 w-4" />, getValue: (i) => `${i.costDetails} (${i.annualInvestment}/an)` },
-    { label: 'Instructions', icon: <Wrench className="h-4 w-4" />, getValue: (i) => i.instructions },
-    { label: 'Fréquence détails', icon: <Clock className="h-4 w-4" />, getValue: (i) => i.applicationFrequencyDetails },
-    { label: 'Disponibilité', icon: <CheckCircle2 className="h-4 w-4" />, getValue: (i) => i.availability },
   ];
 
   return (
@@ -104,7 +90,7 @@ const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalP
                   </TableCell>
                 ))}
               </TableRow>
-              {levelRows.map((row) => (
+              {rows.map((row) => (
                 <TableRow key={row.label}>
                   <TableCell>
                     <div className="flex items-center gap-2">
@@ -123,27 +109,6 @@ const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalP
                       </TableCell>
                     );
                   })}
-                </TableRow>
-              ))}
-              {/* Separator */}
-              <TableRow>
-                <TableCell colSpan={interventions.length + 1} className="py-1">
-                  <div className="border-t border-border" />
-                </TableCell>
-              </TableRow>
-              {detailRows.map((row) => (
-                <TableRow key={row.label}>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      {row.icon}
-                      <span className="text-xs font-medium">{row.label}</span>
-                    </div>
-                  </TableCell>
-                  {interventions.map((i) => (
-                    <TableCell key={i.id} className="text-xs text-muted-foreground max-w-[200px]">
-                      {row.getValue(i)}
-                    </TableCell>
-                  ))}
                 </TableRow>
               ))}
             </TableBody>

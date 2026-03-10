@@ -90,19 +90,6 @@ const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalP
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell className="font-medium text-xs">Preuves globales</TableCell>
-                {interventions.map((i) => (
-                  <TableCell key={i.id} className="text-center">
-                    <Badge
-                      variant={i.evidenceQuality === 'strong' ? 'default' : 'secondary'}
-                      className={`text-xs ${i.evidenceQuality === 'weak' ? 'bg-amber-500/10 text-amber-600 border-amber-500/20' : ''}`}
-                    >
-                      {i.evidenceQuality === 'strong' ? 'Solides' : 'Limitées'}
-                    </Badge>
-                  </TableCell>
-                ))}
-              </TableRow>
               {rows.map((row) => {
                 const isExpanded = expandedRows.has(row.label);
                 return (

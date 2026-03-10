@@ -71,17 +71,6 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
                 <Badge variant="secondary" className="text-xs font-medium">
                   {intervention.categoryLabel}
                 </Badge>
-                {intervention.evidenceQuality === 'strong' && (
-                  <Badge variant="outline" className="text-xs bg-primary/5 text-primary border-primary/20">
-                    Preuves solides
-                  </Badge>
-                )}
-                {intervention.evidenceQuality === 'weak' && (
-                  <Badge variant="outline" className="text-xs bg-amber-500/10 text-amber-600 border-amber-500/20">
-                    <AlertTriangle className="h-3 w-3 mr-1" />
-                    Preuves limitées
-                  </Badge>
-                )}
               </div>
               <CardTitle className="text-lg font-bold leading-tight">
                 {intervention.nameFr}

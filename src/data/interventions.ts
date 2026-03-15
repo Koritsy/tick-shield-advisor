@@ -121,7 +121,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Protection personnelle',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile, mais nécessite rigueur et attention.',
-    instructions: 'Inspecter soigneusement le corps de la tête aux pieds après les activités extérieures. Vérifier le cuir chevelu, les oreilles, les aisselles, l\'aine, derrière les genoux.',
+    instructions: 'Inspecter le corps attentivement de la tête au pieds. Portez attention particulière à: la tête, les cheveux, les oreilles, autour des oreilles, les aisselles, autour de la poitrine, le dos (utilisez un miroir ou demandez de l\'aide), la taille, le nombril, l\'aine, les jambes et l\'arrière des genoux et entre les orteils. Chercher des petits points noirs ou des petites bosses. (ASPC 2020). Un peu d\'effort requis car il faut prendre le temps de faire l\'inspection de façon minutieuse et il peut être difficile de s\'auto-inspecter dans le dos et à l\'arrière de la tête.',
     cost: 'low',
     costDetails: 'Gratuit',
     annualInvestment: '0 $',

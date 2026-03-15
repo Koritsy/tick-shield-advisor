@@ -511,7 +511,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Autre',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — traitement oral ou topique selon prescription vétérinaire.',
-    instructions: 'Traitement oral ou topique selon prescription du vétérinaire. Répéter toutes les 4-12 semaines.',
+    instructions: 'Traitement en forme de croquette à donner oralement ou en liquide topique à appliquer sur la peau de l\'animal au niveau de la nuque. Doit être répété tous les 4-12 semaines dépendant du produit/espèce. Effort/temps moyen car il faut prendre le temps de se déplacer chez le vétérinaire avec notre animal. La manipulation de l\'animal peut être difficile par la suite si ce dernier doit être contentionné pendant l\'application.',
     cost: 'medium',
     costDetails: 'Coût du traitement + consultation vétérinaire (100-150 $)',
     annualInvestment: '150-300 $/an',

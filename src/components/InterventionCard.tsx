@@ -3,8 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Shield, Leaf, DollarSign, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench, Clock } from 'lucide-react';
+import { Shield, Leaf, DollarSign, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench, Clock, BookOpen } from 'lucide-react';
 import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency, AspectEvidenceQuality } from '@/data/interventions';
+import { interventionImages } from '@/data/interventionImages';
 
 interface InterventionCardProps {
   intervention: Intervention;
@@ -60,10 +61,21 @@ const EvidenceIcon = ({ quality }: { quality: AspectEvidenceQuality }) => {
 
 const InterventionCard = ({ intervention, score, rank, isComparing = false, onToggleCompare }: InterventionCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isInstructionsOpen, setIsInstructionsOpen] = useState(false);
+  const interventionImage = interventionImages[intervention.id] ?? '/placeholder.svg';
 
   return (
     <>
       <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in">
+        <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
+          <img
+            src={interventionImage}
+            alt={`Illustration pour ${intervention.nameFr}`}
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+        </div>
+
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
@@ -124,11 +136,11 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
             {intervention.instructions}
           </p>
 
-          <div className="flex gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <Button
               variant="ghost"
               size="sm"
-              className="flex-1 justify-between text-muted-foreground hover:text-foreground"
+              className="justify-between text-muted-foreground hover:text-foreground"
               onClick={() => setIsOpen(true)}
             >
               <span className="flex items-center gap-2">
@@ -136,11 +148,23 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
                 Détails
               </span>
             </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsInstructionsOpen(true)}
+            >
+              <span className="flex items-center gap-2">
+                <BookOpen className="h-4 w-4" />
+                Mode d'emploi
+              </span>
+            </Button>
+
             {onToggleCompare && (
               <Button
-                variant={isComparing ? "default" : "outline"}
+                variant={isComparing ? 'default' : 'outline'}
                 size="sm"
-                className="flex-1"
+                className="sm:col-span-2"
                 onClick={() => onToggleCompare(intervention.id)}
               >
                 <span className="flex items-center gap-2">
@@ -171,6 +195,16 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
             <DetailSection icon={<Clock className="h-4 w-4 text-primary" />} title="Fréquence d'application" content={intervention.applicationFrequencyDetails} />
             <DetailSection icon={<Info className="h-4 w-4 text-primary" />} title="Disponibilité" content={intervention.availability} />
           </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isInstructionsOpen} onOpenChange={setIsInstructionsOpen}>
+        <DialogContent className="max-w-lg max-h-[70vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Mode d'emploi</DialogTitle>
+            <DialogDescription>{intervention.nameFr}</DialogDescription>
+          </DialogHeader>
+          <p className="text-sm text-muted-foreground leading-relaxed">{intervention.instructions}</p>
         </DialogContent>
       </Dialog>
     </>

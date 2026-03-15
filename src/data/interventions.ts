@@ -485,7 +485,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Gestion de la faune',
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — peut nécessiter un exterminateur.',
-    instructions: 'Installer des pièges avec appât au beurre d\'arachide. Peut nécessiter l\'aide d\'un exterminateur.',
+    instructions: 'Les souris peuvent être attirées dans le piège à l\'aide de beurre d\'arachide. Peu d\'effort pour disposer les pièges mais effort de gestion de souris (morte ou vivante) une fois prise. Effort pour nettoyer les pièges après l\'utilisation. Peu d\'effort si on fait venir un exterminateur.',
     cost: 'low',
     costDetails: 'Pièges à partir de 3 $ chacun, exterminateur 200-900 $',
     annualInvestment: '200-1 200 $/an',

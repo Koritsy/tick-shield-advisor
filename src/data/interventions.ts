@@ -251,7 +251,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Aménagement paysager',
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — peut nécessiter un applicateur professionnel.',
-    instructions: 'Appliquer avec un pulvérisateur à pompe. L\'application professionnelle peut être requise.',
+    instructions: 'Asperger le terrain à l\'aide d\'un pulvérisateur à pompe. Peu d\'effort: facile à appliquer avec un pulvérisateur mais peu prendre du temps selon la grosseur du terrain. Du temps est également nécessaire pour la préparation du produit si celui-ci doit être dilué.',
     cost: 'medium',
     costDetails: '35-50 $ pour produits à faire soi-même, 100-200 $ par traitement par exterminateur',
     annualInvestment: '200-400 $/an (2 traitements)',

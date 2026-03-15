@@ -381,7 +381,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Gestion de la faune',
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficile — installation professionnelle souvent nécessaire.',
-    instructions: 'Installer une clôture de 7 à 10 pieds de haut. Peut nécessiter une installation professionnelle.',
+    instructions: 'La clôture doit être 7 à 10 pieds de hauteur (Ramakrishan 2022). Peut être très laborieux, nécessite une certaine expertise et beaucoup de temps (au moins une journée pour un petit terrain ou plusieurs jours si le terrain est grand). Les clôtures en maillons de plastique malléable sont plus facile (et moins coûteuse) à installer.',
     cost: 'high',
     costDetails: '25-155 $ par pied linéaire',
     annualInvestment: '1 000-6 200 $/an (amorti sur 10 ans)',

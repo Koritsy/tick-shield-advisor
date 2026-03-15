@@ -199,7 +199,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Aménagement paysager',
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — nécessite un travail physique d\'installation.',
-    instructions: 'Créer une bordure de copeaux de bois de 1 m de large et 5 cm de profondeur en bordure de propriété.',
+    instructions: 'Étendre une couche de copeaux de 1m de largeur et 5cm de profondeur à la bordure du terrain ou du sentier. (McKay 2020) Effort considérable requis car les copeaux sont lourds et on doit employer de l\'équipement (brouette, pelle, rateau, etc). Dépendant de la grosseur du terrain, l\'application peut prendre plus d\'une journée.',
     cost: 'medium',
     costDetails: '6 $/sac de 42,5 L ou prix en vrac disponible',
     annualInvestment: '~750 $ pour une bordure de 30 m',

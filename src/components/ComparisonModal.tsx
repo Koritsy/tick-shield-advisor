@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, Leaf, DollarSign, HeartPulse, Wrench, Clock, CheckCircle2, AlertTriangle, ChevronDown } from 'lucide-react';
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table';
 import type { Intervention, AspectEvidenceQuality } from '@/data/interventions';
+import { interventionImages } from '@/data/interventionImages';
 
 interface ComparisonModalProps {
   open: boolean;
@@ -83,8 +84,16 @@ const ComparisonModal = ({ open, onOpenChange, interventions }: ComparisonModalP
               <TableRow>
                 <TableHead className="min-w-[120px]">Critère</TableHead>
                 {interventions.map((i) => (
-                  <TableHead key={i.id} className="min-w-[140px] text-center">
-                    <span className="text-xs font-bold">{i.nameFr}</span>
+                  <TableHead key={i.id} className="min-w-[160px] text-center">
+                    <div className="flex flex-col items-center gap-2">
+                      <img
+                        src={interventionImages[i.id] ?? '/placeholder.svg'}
+                        alt={`Illustration pour ${i.nameFr}`}
+                        className="h-16 w-full max-w-[140px] object-cover rounded-md border border-border"
+                        loading="lazy"
+                      />
+                      <span className="text-xs font-bold leading-tight">{i.nameFr}</span>
+                    </div>
                   </TableHead>
                 ))}
               </TableRow>

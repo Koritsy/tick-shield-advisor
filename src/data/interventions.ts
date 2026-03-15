@@ -355,7 +355,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Aménagement paysager',
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficulté moyenne à élevée — nécessite un déplacement de matériaux lourds.',
-    instructions: 'Entreposer le bois loin des zones fréquentées, dans un endroit sec et surélevé.',
+    instructions: 'Entreposer le bois loin des zones fréquemment utilisées, dans un endroit sec et surelevé (par exemple sur un rack à bois). Peut s\'avérer laborieux de déplacer le bois surtout s\'il y a une grosse quantité. Nécessite de l\'équipement (brouette, trailer etc).',
     cost: 'low',
     costDetails: 'Support à bois de chauffage : 20-200 $+',
     annualInvestment: '20-300 $ (utilisation multi-années)',

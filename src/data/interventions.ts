@@ -303,7 +303,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Aménagement paysager',
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — appliquer avec un pulvérisateur, réappliquer régulièrement.',
-    instructions: 'Appliquer avec un pulvérisateur à pompe. Réappliquer toutes les 2-3 semaines.',
+    instructions: 'Asperger le terrain à l\'aide d\'un pulvérisateur à pompe. Peu d\'effort: facile à appliquer avec un pulvérisateur mais peu prendre du temps selon la grosseur du terrain. Du temps est également nécessaire pour la préparation du produit si celui-ci doit être dilué. Doit être réappliqué tous les 2 à 3 semaines.',
     cost: 'medium',
     costDetails: '18 $ par 100 ml pour les produits commerciaux',
     annualInvestment: '200-400 $/an',

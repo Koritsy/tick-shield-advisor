@@ -225,7 +225,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Aménagement paysager',
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficile — peut nécessiter l\'aide d\'un professionnel.',
-    instructions: 'Créer une bordure de pierres ou de gravier en bordure de propriété. Peut nécessiter l\'aide d\'un professionnel.',
+    instructions: 'Étendre une couche de pierres/gravier à la bordure du terrain ou du sentier (pas d\'info sur les spécifications nécessaires). Effort considérable requis car le gravier est lourd et on doit employer de l\'équipement (brouette, pelle, rateau, etc). Dépendant de la grosseur du terrain, l\'application peut prendre plus d\'une journée.',
     cost: 'high',
     costDetails: 'Gravier : 34 $/tonne, Pierre de rivière : 80-125 $/tonne',
     annualInvestment: '~2 400 $/an (amorti sur 10 ans)',

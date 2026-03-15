@@ -407,7 +407,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Gestion de la faune',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile à appliquer sur les plantes et surfaces.',
-    instructions: 'Appliquer sur les plantes et surfaces autour de la propriété. Répéter toutes les 6-8 semaines et après la pluie.',
+    instructions: 'Selon le format, étendre ou asperger sur les plantes et surfaces autour du terrain. Répéter l\'application régulièrement (minimum 6 à 8 semaines) et après la pluie. Il est recommandé d\'utiliser différents produits en alternance pour éviter que les cerfs s\'accoutument à l\'odeur/goût du répulsif. (Ramakrishan 2022): Effort moyen requis: très facile à appliquer mais peu prendre du temps si on a une grande superficie à couvrir et doit être répété souvent.',
     cost: 'medium',
     costDetails: '15 $+ par litre',
     annualInvestment: '~720 $/an (grande surface)',

@@ -433,7 +433,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Gestion de la faune',
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficile — installation professionnelle requise.',
-    instructions: 'Placer à des endroits stratégiques à intervalles de 10 m au printemps et au milieu de l\'été. Installation professionnelle requise.',
+    instructions: 'Les boites sont placées dans des endroits stratégiques fréquentés par les souris, à 10m d\'intervalle, au printemps et répéter mi-été. Effort: doit faire venir un professionnel.',
     cost: 'high',
     costDetails: '45-50 $ par boîte',
     annualInvestment: '~600 $/an pour une propriété moyenne',

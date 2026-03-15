@@ -329,7 +329,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Aménagement paysager',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — tâches d\'entretien régulières.',
-    instructions: 'Tondre la pelouse régulièrement, ramasser les feuilles en mars et juin, enlever les broussailles.',
+    instructions: 'Ramasser les feuilles mars et juin (Schulze et al 1995). Effort et temps nécessaire varient selon la grosseur du terrain. Peut s\'avérer laborieux.',
     cost: 'low',
     costDetails: 'Gratuit si fait soi-même, 100-300 $/mois pour un paysagiste',
     annualInvestment: '0-2 400 $/an',

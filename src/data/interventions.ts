@@ -147,7 +147,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Protection personnelle',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — porter comme des vêtements réguliers.',
-    instructions: 'Porter comme des vêtements réguliers. L\'efficacité augmente avec le temps de contact avec la tique.',
+    instructions: 'Rentrer le bas des pantalons à l\'intérieur des chaussettes, rentrer la chemise dans les pantalons. Peu d\'effort requis: Prends 1-2 minutes additionelles. Plus le temps de contact entre la tique et le vêtement est long, plus l\'efficacité est grande. L\'efficacité est donc réduite si le contact avec la tique en quête survient près de la peau non couverte (mains, cou) (Eisen & Dolan, 2018).',
     cost: 'medium',
     costDetails: '25 $+ pour les hauts, 45 $+ pour les pantalons, 15 $+ pour les chapeaux',
     annualInvestment: '~100 $/an',

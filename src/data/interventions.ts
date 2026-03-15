@@ -277,7 +277,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Aménagement paysager',
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — appliquer avec un pulvérisateur.',
-    instructions: 'Appliquer avec un pulvérisateur à pompe. Répéter régulièrement pour de meilleurs résultats.',
+    instructions: 'Asperger le terrain à l\'aide d\'un pulvérisateur à pompe. Peu d\'effort: facile à appliquer avec un pulvérisateur mais peu prendre du temps selon la grosseur du terrain.',
     cost: 'medium',
     costDetails: '100-200 $ par acre par traitement',
     annualInvestment: '200-400 $/an (2 traitements)',

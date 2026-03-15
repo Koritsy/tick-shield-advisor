@@ -43,7 +43,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Protection personnelle',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile à adopter, ne nécessite aucun équipement.',
-    instructions: 'Rester sur les sentiers, éviter de nourrir la faune, installer les mangeoires à oiseaux loin de la maison, porter une protection lors du jardinage.',
+    instructions: 'Ne pas nourir les animaux (ne pas laisser de la nourriture dehors sur le terrain), ne pas entreposer appats de chasse, installer la mangeoire d\'oiseaux loin de la maison, marcher sur les sentiers, se protèger lors des travaux de jardinage etc; Effort requis: Parfois les habitudes sont difficiles à modifier pour certaines personnes.',
     cost: 'low',
     costDetails: 'Gratuit',
     annualInvestment: '0 $',

@@ -95,7 +95,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Protection personnelle',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — utiliser des vêtements existants.',
-    instructions: 'Porter des vêtements longs de couleur claire, rentrer le pantalon dans les chaussettes, rentrer la chemise dans le pantalon.',
+    instructions: 'Rentrer le bas des pantalons à l\'intérieur des chaussettes, rentrer la chemise dans les pantalons. Peu d\'effort requis: Prends 1-2 minutes additionelles.',
     cost: 'low',
     costDetails: 'Gratuit si on utilise des vêtements existants',
     annualInvestment: '0 $',

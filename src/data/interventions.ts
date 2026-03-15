@@ -173,7 +173,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Protection personnelle',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile à appliquer, mais réapplication fréquente nécessaire.',
-    instructions: 'Vaporiser sur les vêtements et la peau. Réappliquer fréquemment.',
+    instructions: 'Asperger sur les vêtements et la peau. Éviter les yeux et le visage. Application doit être répétée régulièrement. Peu d\'effort requis: Prends 1-2 minutes additionelles.',
     cost: 'medium',
     costDetails: '15 $+ par 100 ml',
     annualInvestment: '~960 $/an (utilisation fréquente)',

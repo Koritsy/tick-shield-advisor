@@ -459,7 +459,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Gestion de la faune',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — placer les tubes dans les zones fréquentées par les souris.',
-    instructions: 'Placer les tubes dans les zones fréquentées par les souris à intervalles de 10 m au printemps et au milieu de l\'été.',
+    instructions: 'Placer les tubes dans des endroits stratégiques fréquentés par les souris, autour du terrain à 10 mètres d\'intervalle. Disposer au printemps et répéter mi-été. Effort léger, on peu disperser les tubes en peu de temps en se déplaçant autour du terrain.',
     cost: 'low',
     costDetails: '25 $ pour 6 tubes',
     annualInvestment: '~100 $/an',

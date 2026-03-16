@@ -15,14 +15,14 @@ import protectiveBehaviors from '@/assets/interventions/protective-behaviors.png
 import protectiveClothing from '@/assets/interventions/protective-clothing.png';
 import rodentBait from '@/assets/interventions/rodent-bait-user.png';
 import rodentElimination from '@/assets/interventions/rodent-elimination-user.png';
-import rubberSubstrate from '@/assets/interventions/Substrat de caoutchouc.png';
-import selfCheck from '@/assets/interventions/self-check.jpg';
+import rubberSubstrate from '@/assets/interventions/rubber.png';
+import selfCheck from '@/assets/interventions/auto-inspection.png';
 import streamBorder from '@/assets/interventions/stream-border-user.png';
 import tickTubes from '@/assets/interventions/tick-tubes-user.png';
 import wildlifeManagement from '@/assets/interventions/wildlife-management-user.png';
 import woodChipBorder from '@/assets/interventions/wood-chip-border.png';
 import yardMaintenance from '@/assets/interventions/yard-maintenance.png';
-import aromaticPlants from '@/assets/interventions/Plantes aromatiques (répulsives).png';
+import aromaticPlants from '@/assets/interventions/plants.png';
 
 export const interventionImages: Record<string, string> = {
   'protective-behaviors': protectiveBehaviors,
@@ -36,13 +36,13 @@ export const interventionImages: Record<string, string> = {
   'gravel-border': gravelBorder,
   'rubber-substrate': rubberSubstrate,
   'aromatic-plants': aromaticPlants,
-  pesticides: pesticidesImg,
+  'pesticides': pesticidesImg,
   'natural-pesticides': naturalPesticides,
   'biological-agents': biologicalAgents,
   'yard-maintenance': yardMaintenance,
   'firewood-storage': firewoodStorage,
   'stream-border': streamBorder,
-  fencing,
+  'fencing': fencing,
   'deer-repellents': deerRepellents,
   'bait-box': baitBox,
   'tick-tubes': tickTubes,

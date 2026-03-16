@@ -36,7 +36,7 @@ export const interventionImages: Record<string, string> = {
   'gravel-border': gravelBorder,
   'rubber-substrate': rubberSubstrate,
   'aromatic-plants': aromaticPlants,
-  pesticides: deerAcaricide,
+  pesticides: pesticidesImg,
   'natural-pesticides': naturalPesticides,
   'biological-agents': biologicalAgents,
   'yard-maintenance': yardMaintenance,

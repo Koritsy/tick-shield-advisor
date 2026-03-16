@@ -5,6 +5,7 @@ import deerRepellents from '@/assets/interventions/deer-repellents-user.png';
 import deetRepellent from '@/assets/interventions/deet-repellent.png';
 import fencing from '@/assets/interventions/fencing-user.png';
 import firewoodStorage from '@/assets/interventions/firewood-storage.png';
+import pesticidesImg from '@/assets/interventions/pesticides.png';
 import gravelBorder from '@/assets/interventions/gravel-border.png';
 import naturalPesticides from '@/assets/interventions/natural-pesticides.png';
 import naturalRepellents from '@/assets/interventions/natural-repellents.png';

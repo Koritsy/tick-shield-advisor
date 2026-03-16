@@ -19,7 +19,8 @@ import selfCheck from '@/assets/interventions/self-check.jpg';
 import streamBorder from '@/assets/interventions/stream-border-user.png';
 import tickTubes from '@/assets/interventions/tick-tubes-user.png';
 import wildlifeManagement from '@/assets/interventions/wildlife-management-user.png';
-import aromaticPlants from '@/assets/interventions/Plantes aromatiques (répulsives).png';
+import woodChipBorder from '@/assets/interventions/wood-chip-border.png';
+import yardMaintenance from '@/assets/interventions/yard-maintenance.png';
 
 export const interventionImages: Record<string, string> = {
   'protective-behaviors': protectiveBehaviors,

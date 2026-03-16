@@ -634,6 +634,7 @@ export const interventions: Intervention[] = [
     applicationFrequencyDetails: 'L\'appât doit être remplacé chaque semaine.',
   },
   {
+    id: 'rodent-elimination',
     name: 'Rodent Elimination',
     nameFr: 'Élimination des rongeurs',
     category: 'wildlife',

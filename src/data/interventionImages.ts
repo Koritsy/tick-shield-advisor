@@ -12,7 +12,7 @@ import permethrinClothing from '@/assets/interventions/permethrin-clothing.png';
 import petTreatment from '@/assets/interventions/pet-treatment-user.png';
 import protectiveBehaviors from '@/assets/interventions/protective-behaviors.png';
 import protectiveClothing from '@/assets/interventions/protective-clothing.png';
-import rodentBait from '@/assets/interventions/Appâts acaricide pour rongeur.png';
+import rodentBait from '@/assets/interventions/rodent-bait-user.png';
 import rodentElimination from '@/assets/interventions/rodent-elimination-user.png';
 import rubberSubstrate from '@/assets/interventions/Substrat de caoutchouc.png';
 import selfCheck from '@/assets/interventions/self-check.jpg';

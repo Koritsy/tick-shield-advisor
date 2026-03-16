@@ -38,7 +38,7 @@ export const interventionImages: Record<string, string> = {
   pesticides: deerAcaricide,
   'natural-pesticides': naturalPesticides,
   'biological-agents': biologicalAgents,
-  'yard-maintenance': wildlifeManagement,
+  'yard-maintenance': yardMaintenance,
   'firewood-storage': firewoodStorage,
   'stream-border': streamBorder,
   fencing,

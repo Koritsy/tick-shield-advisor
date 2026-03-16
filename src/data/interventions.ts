@@ -321,6 +321,8 @@ export const interventions: Intervention[] = [
     applicationFrequency: 'once',
     applicationFrequencyDetails: 'Plantation unique avec entretien régulier.',
   },
+  {
+    id: 'pesticides',
     name: 'Pesticide Treatment',
     nameFr: 'Traitement avec pesticides',
     category: 'landscaping',

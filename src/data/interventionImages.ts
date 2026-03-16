@@ -31,7 +31,7 @@ export const interventionImages: Record<string, string> = {
   'permethrin-clothing': permethrinClothing,
   'natural-repellents': naturalRepellents,
   'permethrin-spray': permethrinClothing,
-  'wood-chip-border': wildlifeManagement,
+  'wood-chip-border': woodChipBorder,
   'gravel-border': gravelBorder,
   'rubber-substrate': rubberSubstrate,
   'aromatic-plants': aromaticPlants,

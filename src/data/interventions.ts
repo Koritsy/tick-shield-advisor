@@ -478,6 +478,7 @@ export const interventions: Intervention[] = [
     applicationFrequencyDetails: 'Installation unique. Les pompes doivent être remplacées en moyenne tous les 3 ans.',
   },
   {
+    id: 'fencing',
     name: 'Deer Fencing',
     nameFr: 'Installation de clôtures',
     category: 'wildlife',

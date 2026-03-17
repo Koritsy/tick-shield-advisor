@@ -19,17 +19,17 @@ import rubberSubstrate from '@/assets/interventions/rubber.png';
 import selfCheck from '@/assets/interventions/auto-inspection.png';
 import streamBorder from '@/assets/interventions/stream-border-user.png';
 import tickTubes from '@/assets/interventions/tick-tubes-user.png';
-import wildlifeManagement from '@/assets/interventions/wildlife-management-user.png';
 import woodChipBorder from '@/assets/interventions/wood-chip-border.png';
 import yardMaintenance from '@/assets/interventions/yard-maintenance.png';
 import aromaticPlants from '@/assets/interventions/plants.png';
+import permethrinTreatment from '@/assets/interventions/permethrin-treated-clothing.png';
 
 export const interventionImages: Record<string, string> = {
   'protective-behaviors': protectiveBehaviors,
   'deet-repellent': deetRepellent,
   'protective-clothing': protectiveClothing,
   'self-check': selfCheck,
-  'permethrin-clothing': permethrinClothing,
+  'permethrin-clothing': permethrinTreatment,
   'natural-repellents': naturalRepellents,
   'permethrin-spray': permethrinClothing,
   'wood-chip-border': woodChipBorder,

@@ -107,7 +107,7 @@ const ComparisonTool = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1" data-tour="filter-panel">
             <div className="lg:sticky lg:top-24">
               <FilterPanel
                 effectivenessWeight={effectivenessWeight}

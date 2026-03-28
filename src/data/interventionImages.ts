@@ -1,4 +1,4 @@
-import baitBox from '@/assets/interventions/bait-box-user.png';
+
 import biologicalAgents from '@/assets/interventions/biological-agents.png';
 import deerAcaricide from '@/assets/interventions/deer-acaricide-user.png';
 import deerRepellents from '@/assets/interventions/deer-repellents-user.png';

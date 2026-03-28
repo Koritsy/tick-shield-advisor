@@ -61,6 +61,7 @@ const ComparisonTool = () => {
 
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
+  const [walkthroughOpen, setWalkthroughOpen] = useState(false);
 
   const handleCategoryToggle = (category: string) => {
     setSelectedCategories((prev) =>

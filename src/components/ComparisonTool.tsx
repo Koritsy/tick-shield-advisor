@@ -171,6 +171,7 @@ const ComparisonTool = () => {
       )}
 
       <ComparisonModal open={compareOpen} onOpenChange={setCompareOpen} interventions={compareInterventions} />
+      <Walkthrough open={walkthroughOpen} onOpenChange={setWalkthroughOpen} />
     </section>
   );
 };

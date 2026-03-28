@@ -2,8 +2,9 @@ import { useState, useMemo } from 'react';
 import FilterPanel from './FilterPanel';
 import InterventionCard from './InterventionCard';
 import ComparisonModal from './ComparisonModal';
+import Walkthrough from './Walkthrough';
 import { Button } from '@/components/ui/button';
-import { GitCompareArrows, X } from 'lucide-react';
+import { GitCompareArrows, X, HelpCircle } from 'lucide-react';
 import { interventions } from '@/data/interventions';
 import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency } from '@/data/interventions';
 

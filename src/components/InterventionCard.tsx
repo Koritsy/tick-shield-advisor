@@ -65,7 +65,7 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
 
   return (
     <>
-      <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in">
+      <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in" {...(rank === 1 ? { 'data-tour': 'first-card' } : {})}>
         <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
           <img
             src={interventionImage}

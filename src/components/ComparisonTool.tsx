@@ -2,8 +2,9 @@ import { useState, useMemo } from 'react';
 import FilterPanel from './FilterPanel';
 import InterventionCard from './InterventionCard';
 import ComparisonModal from './ComparisonModal';
+import Walkthrough from './Walkthrough';
 import { Button } from '@/components/ui/button';
-import { GitCompareArrows, X } from 'lucide-react';
+import { GitCompareArrows, X, HelpCircle } from 'lucide-react';
 import { interventions } from '@/data/interventions';
 import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency } from '@/data/interventions';
 
@@ -60,6 +61,7 @@ const ComparisonTool = () => {
 
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
+  const [walkthroughOpen, setWalkthroughOpen] = useState(false);
 
   const handleCategoryToggle = (category: string) => {
     setSelectedCategories((prev) =>
@@ -96,8 +98,12 @@ const ComparisonTool = () => {
             Comparez les solutions de prévention contre les tiques
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Ajustez vos priorités et nous classerons les solutions qui correspondent le mieux à vos valeurs. Cliquez sur une solution pour voir les détails.
+           Ajustez vos priorités et nous classerons les solutions qui correspondent le mieux à vos valeurs. Cliquez sur une solution pour voir les détails.
           </p>
+          <Button variant="outline" size="sm" className="mt-3" onClick={() => setWalkthroughOpen(true)}>
+            <HelpCircle className="h-4 w-4 mr-1.5" />
+            Comment ça marche ?
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -165,6 +171,7 @@ const ComparisonTool = () => {
       )}
 
       <ComparisonModal open={compareOpen} onOpenChange={setCompareOpen} interventions={compareInterventions} />
+      <Walkthrough open={walkthroughOpen} onOpenChange={setWalkthroughOpen} />
     </section>
   );
 };

@@ -152,6 +152,7 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
                 size="sm"
                 className="flex-1"
                 onClick={() => onToggleCompare(intervention.id)}
+                {...(rank === 1 ? { 'data-tour': 'compare-button' } : {})}
               >
                 {isComparing ? <CheckCircle2 className="h-4 w-4 mr-1.5" /> : <Shield className="h-4 w-4 mr-1.5" />}
                 {isComparing ? 'Sélectionné' : 'Comparer'}

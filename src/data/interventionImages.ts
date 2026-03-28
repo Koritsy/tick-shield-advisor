@@ -44,7 +44,7 @@ export const interventionImages: Record<string, string> = {
   'stream-border': streamBorder,
   'fencing': fencing,
   'deer-repellents': deerRepellents,
-  'bait-box': baitBox,
+  
   'tick-tubes': tickTubes,
   'rodent-bait': rodentBait,
   'rodent-elimination': rodentElimination,

@@ -60,7 +60,7 @@ const EvidenceIcon = ({ quality }: { quality: AspectEvidenceQuality }) => {
   return <AlertTriangle className="h-3 w-3 text-amber-500 shrink-0" />;
 };
 
-const InterventionCard = ({ intervention, score, rank, isComparing = false, onToggleCompare }: InterventionCardProps) => {
+const InterventionCard = ({ intervention, score, rank, isComparing = false, isEssential = false, onToggleCompare }: InterventionCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const interventionImage = interventionImages[intervention.id] ?? '/placeholder.svg';
 

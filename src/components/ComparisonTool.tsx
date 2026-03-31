@@ -90,6 +90,23 @@ const ComparisonTool = () => {
       .sort((a, b) => b.score - a.score);
   }, [effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight, selectedCategories]);
 
+  const requiredIds = ['protective-behaviors', 'self-check'];
+  const requiredInterventions = requiredIds
+    .map((id) => interventions.find((intervention) => intervention.id === id))
+    .filter((intervention): intervention is Intervention => Boolean(intervention));
+
+  const requiredWithScore = requiredInterventions.map((intervention) => {
+    const found = rankedInterventions.find((item) => item.intervention.id === intervention.id);
+    const score = found ? found.score : calculateScore(intervention, effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight);
+    return { intervention, score };
+  });
+
+  const additionalRecommended = rankedInterventions
+    .filter(({ intervention }) => !requiredIds.includes(intervention.id))
+    .slice(0, 3);
+
+  const recommendedGroup = [...requiredWithScore, ...additionalRecommended];
+
   return (
     <section id="compare" className="py-12 md:py-16 gradient-nature">
       <div className="container px-4">
@@ -129,19 +146,26 @@ const ComparisonTool = () => {
           </div>
 
           <div className="lg:col-span-3">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col gap-2 mb-4">
+              <div>
+                <h3 className="text-lg font-semibold">Recommandation d'ensemble</h3>
+                <p className="text-sm text-muted-foreground">
+                  Pour renforcer votre protection, adoptez d'abord les mesures essentielles suivantes, puis combinez-les avec des solutions bien adaptées à votre situation.
+                </p>
+              </div>
               <span className="text-sm text-muted-foreground">
-                Affichage de {rankedInterventions.length} solutions
+                {recommendedGroup.length} interventions recommandées (dont 2 obligatoires)
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {rankedInterventions.map(({ intervention, score }, index) => (
+              {recommendedGroup.map(({ intervention, score }, index) => (
                 <InterventionCard
                   key={intervention.id}
                   intervention={intervention}
                   score={score}
                   rank={index + 1}
+                  isEssential={requiredIds.includes(intervention.id)}
                   isComparing={compareIds.includes(intervention.id)}
                   onToggleCompare={handleToggleCompare}
                 />

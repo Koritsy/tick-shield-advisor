@@ -12,6 +12,7 @@ interface InterventionCardProps {
   score: number;
   rank: number;
   isComparing?: boolean;
+  isEssential?: boolean;
   onToggleCompare?: (id: string) => void;
 }
 
@@ -82,6 +83,11 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
                 <Badge variant="secondary" className="text-xs font-medium">
                   {intervention.categoryLabel}
                 </Badge>
+                {isEssential && (
+                  <Badge variant="destructive" className="text-xs font-medium">
+                    Essentiel
+                  </Badge>
+                )}
               </div>
               <CardTitle className="text-lg font-bold leading-tight">
                 {intervention.nameFr}

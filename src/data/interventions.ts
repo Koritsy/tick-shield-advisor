@@ -69,7 +69,7 @@ export const interventions: Intervention[] = [
     categoryLabel: 'Protection personnelle',
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile à appliquer, disponible en pharmacie.',
-    instructions: 'Asperger sur les vêtements et la peau. Éviter les yeux et le visage. Application doit être répétée si l\'exposition dure plusieurs heures. Peu d\'effort requis: Prends 1-2 minutes additionelles.',
+    instructions: 'Asperger sur les vêtements et la peau chaque fois qu\'une exposition aux tiques est prévue. Éviter les yeux et le visage. Application doit être répétée si l\'exposition dure plusieurs heures. Peu d\'effort requis: Prends 1-2 minutes additionelles.',
     cost: 'low',
     costDetails: '8-20 $ par 100 ml',
     annualInvestment: '~320 $/an (utilisation fréquente)',

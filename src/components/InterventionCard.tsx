@@ -61,12 +61,11 @@ const EvidenceIcon = ({ quality }: { quality: AspectEvidenceQuality }) => {
 
 const InterventionCard = ({ intervention, score, rank, isComparing = false, onToggleCompare }: InterventionCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isInstructionsOpen, setIsInstructionsOpen] = useState(false);
   const interventionImage = interventionImages[intervention.id] ?? '/placeholder.svg';
 
   return (
     <>
-      <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in">
+      <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in" {...(rank === 1 ? { 'data-tour': 'first-card' } : {})}>
         <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
           <img
             src={interventionImage}
@@ -136,41 +135,27 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
             {intervention.instructions}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="justify-between text-muted-foreground hover:text-foreground"
-              onClick={() => setIsOpen(true)}
-            >
-              <span className="flex items-center gap-2">
-                <Info className="h-4 w-4" />
-                Détails
-              </span>
-            </Button>
-
+          <div className="flex gap-2">
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setIsInstructionsOpen(true)}
+              className="flex-1"
+              onClick={() => setIsOpen(true)}
             >
-              <span className="flex items-center gap-2">
-                <BookOpen className="h-4 w-4" />
-                Mode d'emploi
-              </span>
+              <Info className="h-4 w-4 mr-1.5" />
+              Détails
             </Button>
 
             {onToggleCompare && (
               <Button
                 variant={isComparing ? 'default' : 'outline'}
                 size="sm"
-                className="sm:col-span-2"
+                className="flex-1"
                 onClick={() => onToggleCompare(intervention.id)}
+                {...(rank === 1 ? { 'data-tour': 'compare-button' } : {})}
               >
-                <span className="flex items-center gap-2">
-                  {isComparing ? <CheckCircle2 className="h-4 w-4" /> : <Shield className="h-4 w-4" />}
-                  {isComparing ? 'Sélectionné' : 'Comparer'}
-                </span>
+                {isComparing ? <CheckCircle2 className="h-4 w-4 mr-1.5" /> : <Shield className="h-4 w-4 mr-1.5" />}
+                {isComparing ? 'Sélectionné' : 'Comparer'}
               </Button>
             )}
           </div>
@@ -194,17 +179,15 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, onTo
             <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={`${intervention.easeOfUseDetails} ${intervention.availability}`} />
             <DetailSection icon={<Clock className="h-4 w-4 text-primary" />} title="Fréquence d'application" content={intervention.applicationFrequencyDetails} />
             <DetailSection icon={<Info className="h-4 w-4 text-primary" />} title="Disponibilité" content={intervention.availability} />
-          </div>
-        </DialogContent>
-      </Dialog>
 
-      <Dialog open={isInstructionsOpen} onOpenChange={setIsInstructionsOpen}>
-        <DialogContent className="max-w-lg max-h-[70vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Mode d'emploi</DialogTitle>
-            <DialogDescription>{intervention.nameFr}</DialogDescription>
-          </DialogHeader>
-          <p className="text-sm text-muted-foreground leading-relaxed">{intervention.instructions}</p>
+            <div className="border-t border-border pt-4">
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen className="h-4 w-4 text-primary" />
+                <span className="text-sm font-semibold text-foreground">Mode d'emploi</span>
+              </div>
+              <p className="text-sm text-muted-foreground pl-6 leading-relaxed">{intervention.instructions}</p>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </>

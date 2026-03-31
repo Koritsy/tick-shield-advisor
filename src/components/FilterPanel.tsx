@@ -118,7 +118,7 @@ const FilterPanel = ({
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-border">
+      <div className="mt-8 pt-6 border-t border-border" data-tour="category-filter">
         <Label className="text-sm font-medium mb-3 block">Filtrer par catégorie</Label>
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (

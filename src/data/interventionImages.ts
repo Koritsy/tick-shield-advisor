@@ -1,4 +1,4 @@
-import baitBox from '@/assets/interventions/bait-box-user.png';
+
 import biologicalAgents from '@/assets/interventions/biological-agents.png';
 import deerAcaricide from '@/assets/interventions/deer-acaricide-user.png';
 import deerRepellents from '@/assets/interventions/deer-repellents-user.png';
@@ -44,7 +44,7 @@ export const interventionImages: Record<string, string> = {
   'stream-border': streamBorder,
   'fencing': fencing,
   'deer-repellents': deerRepellents,
-  'bait-box': baitBox,
+  
   'tick-tubes': tickTubes,
   'rodent-bait': rodentBait,
   'rodent-elimination': rodentElimination,

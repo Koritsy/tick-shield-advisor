@@ -45,6 +45,22 @@ const FilterPanel = ({
       </p>
 
       <div className="space-y-6">
+        <div className="mt-2 mb-4" data-tour="category-filter">
+          <Label className="text-sm font-medium mb-3 block">Filtrer par catégorie</Label>
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <Badge
+                key={category.id}
+                variant={selectedCategories.includes(category.id) ? 'default' : 'outline'}
+                className="cursor-pointer transition-all hover:scale-105"
+                onClick={() => onCategoryToggle(category.id)}
+              >
+                {category.label}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <Label className="flex items-center gap-2 text-sm font-medium">
@@ -115,22 +131,6 @@ const FilterPanel = ({
           </div>
           <Slider value={[frequencyWeight]} onValueChange={([v]) => onFrequencyChange(v)} max={100} step={5} className="w-full" />
           <p className="text-xs text-muted-foreground">Quelle importance accordez-vous à une faible fréquence d'application?</p>
-        </div>
-      </div>
-
-      <div className="mt-8 pt-6 border-t border-border" data-tour="category-filter">
-        <Label className="text-sm font-medium mb-3 block">Filtrer par catégorie</Label>
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <Badge
-              key={category.id}
-              variant={selectedCategories.includes(category.id) ? 'default' : 'outline'}
-              className="cursor-pointer transition-all hover:scale-105"
-              onClick={() => onCategoryToggle(category.id)}
-            >
-              {category.label}
-            </Badge>
-          ))}
         </div>
       </div>
     </div>

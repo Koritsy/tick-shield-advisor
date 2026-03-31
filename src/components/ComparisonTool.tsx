@@ -62,6 +62,7 @@ const ComparisonTool = () => {
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
   const [walkthroughOpen, setWalkthroughOpen] = useState(true);
+  const [showAllSolutions, setShowAllSolutions] = useState(false);
 
   const handleCategoryToggle = (category: string) => {
     setSelectedCategories((prev) =>
@@ -106,6 +107,7 @@ const ComparisonTool = () => {
     .slice(0, 3);
 
   const recommendedGroup = [...requiredWithScore, ...additionalRecommended];
+  const displayedInterventions = showAllSolutions ? rankedInterventions : recommendedGroup;
 
   return (
     <section id="compare" className="py-12 md:py-16 gradient-nature">
@@ -147,23 +149,29 @@ const ComparisonTool = () => {
 
           <div className="lg:col-span-3">
             <div className="flex flex-col gap-2 mb-4">
-              <div>
-                <h3 className="text-lg font-semibold">Recommandation d'ensemble</h3>
-                <p className="text-sm text-muted-foreground">
-                  Pour renforcer votre protection, adoptez d'abord les mesures essentielles suivantes, puis combinez-les avec des solutions bien adaptées à votre situation.
-                </p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h3 className="text-lg font-semibold">{showAllSolutions ? 'Toutes les solutions' : "Recommandation d'ensemble"}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {showAllSolutions
+                      ? 'Affichage de toutes les interventions correspondant aux filtres de catégorie et de priorité.'
+                      : "Pour renforcer votre protection, adoptez d'abord les mesures essentielles, puis combinez-les avec des solutions bien adaptées à votre situation."}
+                  </p>
+                </div>
+                <Button size="sm" variant="outline" onClick={() => setShowAllSolutions((prev) => !prev)}>
+                  {showAllSolutions ? 'Voir recommandations' : 'Voir toutes les solutions'}
+                </Button>
               </div>
               <span className="text-sm text-muted-foreground">
-                {recommendedGroup.length} interventions recommandées (dont 2 obligatoires)
+                {showAllSolutions ? rankedInterventions.length : recommendedGroup.length} {showAllSolutions ? 'interventions trouvées' : 'interventions recommandées (dont 2 obligatoires)'}
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {recommendedGroup.map(({ intervention, score }, index) => (
+              {displayedInterventions.map(({ intervention }, index) => (
                 <InterventionCard
                   key={intervention.id}
                   intervention={intervention}
-                  score={score}
                   rank={index + 1}
                   isEssential={requiredIds.includes(intervention.id)}
                   isComparing={compareIds.includes(intervention.id)}

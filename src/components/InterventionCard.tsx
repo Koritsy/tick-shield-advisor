@@ -9,7 +9,6 @@ import { interventionImages } from '@/data/interventionImages';
 
 interface InterventionCardProps {
   intervention: Intervention;
-  score: number;
   rank: number;
   isComparing?: boolean;
   isEssential?: boolean;
@@ -60,7 +59,7 @@ const EvidenceIcon = ({ quality }: { quality: AspectEvidenceQuality }) => {
   return <AlertTriangle className="h-3 w-3 text-amber-500 shrink-0" />;
 };
 
-const InterventionCard = ({ intervention, score, rank, isComparing = false, isEssential = false, onToggleCompare }: InterventionCardProps) => {
+const InterventionCard = ({ intervention, rank, isComparing = false, isEssential = false, onToggleCompare }: InterventionCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const interventionImage = interventionImages[intervention.id] ?? '/placeholder.svg';
 
@@ -97,9 +96,6 @@ const InterventionCard = ({ intervention, score, rank, isComparing = false, isEs
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-sm">
                 #{rank}
               </div>
-              <span className="text-xs text-muted-foreground font-medium">
-                Score: {Math.round(score)}
-              </span>
             </div>
           </div>
         </CardHeader>

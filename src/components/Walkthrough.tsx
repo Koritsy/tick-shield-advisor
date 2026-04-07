@@ -177,51 +177,55 @@ const Walkthrough = ({
 
   const currentStep = tourSteps[step];
 
+  const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
   // Calculate tooltip position
   const getTooltipStyle = (): React.CSSProperties => {
     const gap = 16;
+    const maxWidth = 340;
+    const centerX = targetRect.left + targetRect.width / 2;
+    const clampedCenterX = clamp(centerX, maxWidth / 2 + 10, window.innerWidth - maxWidth / 2 - 10);
+    const spaceAbove = targetRect.top;
+    const tooltipHeight = 200; // approximate height
+    const shouldPositionBelow = spaceAbove < tooltipHeight + gap;
+
     switch (currentStep.position) {
       case 'right':
         return {
-          top: targetRect.top + targetRect.height / 2,
-          left: targetRect.right + pad + gap,
+          top: clamp(targetRect.top + targetRect.height / 2, 10, window.innerHeight - 10),
+          left: clamp(targetRect.right + pad + gap, 10, window.innerWidth - maxWidth - 10),
           transform: 'translateY(-50%)',
-          maxWidth: 340,
+          maxWidth,
         };
       case 'left':
         return {
-          top: targetRect.top + targetRect.height / 2,
-          right: window.innerWidth - targetRect.left + pad + gap,
+          top: clamp(targetRect.top + targetRect.height / 2, 10, window.innerHeight - 10),
+          right: clamp(window.innerWidth - targetRect.left + pad + gap, 10, window.innerWidth - maxWidth - 10),
           transform: 'translateY(-50%)',
-          maxWidth: 340,
+          maxWidth,
         };
       case 'bottom':
         return {
-          top: targetRect.bottom + pad + gap,
-          left: targetRect.left + targetRect.width / 2,
+          top: clamp(targetRect.bottom + pad + gap, 10, window.innerHeight - 10),
+          left: clampedCenterX,
           transform: 'translateX(-50%)',
-          maxWidth: 340,
+          maxWidth,
         };
       case 'top':
-        // Check if there's enough space above; if not, position below
-        const spaceAbove = targetRect.top;
-        const tooltipHeight = 200; // approximate height
-        const shouldPositionBelow = spaceAbove < tooltipHeight;
-        
         if (shouldPositionBelow) {
           return {
-            top: targetRect.bottom + pad + gap,
-            left: targetRect.left + targetRect.width / 2 - 16,
+            top: clamp(targetRect.bottom + pad + gap, 10, window.innerHeight - 10),
+            left: clampedCenterX,
             transform: 'translateX(-50%)',
-            maxWidth: 340,
+            maxWidth,
           };
         }
-        
+
         return {
           top: Math.max(10, targetRect.top - pad - gap - tooltipHeight),
-          left: targetRect.left + targetRect.width / 2 - 16,
+          left: clampedCenterX,
           transform: 'translateX(-50%)',
-          maxWidth: 340,
+          maxWidth,
         };
     }
   };

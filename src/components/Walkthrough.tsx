@@ -55,10 +55,8 @@ const Walkthrough = ({ open, onOpenChange }: WalkthroughProps) => {
       const rect = el.getBoundingClientRect();
       const currentY = window.scrollY || document.documentElement.scrollTop;
       const targetY = currentY + rect.top - window.innerHeight / 2 + rect.height / 2;
-      const distance = Math.abs(targetY - currentY);
-      const behavior = distance < 180 ? 'auto' : 'smooth';
 
-      window.scrollTo({ top: targetY, behavior });
+      window.scrollTo({ top: targetY, behavior: 'auto' });
       // Increased delay to let scroll settle and add smooth transition
       setTimeout(() => {
         setTargetRect(el.getBoundingClientRect());

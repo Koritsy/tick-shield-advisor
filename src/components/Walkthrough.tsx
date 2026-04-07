@@ -8,6 +8,7 @@ interface TourStep {
   title: string;
   description: string;
   position: 'top' | 'bottom' | 'left' | 'right';
+  offsetX?: number;
 }
 
 const tourSteps: TourStep[] = [
@@ -34,6 +35,7 @@ const tourSteps: TourStep[] = [
     title: '4. Comparez côte à côte',
     description: 'Sélectionnez 2 solutions ou plus avec ce bouton, puis un panneau flottant apparaîtra en bas pour ouvrir le comparatif détaillé.',
     position: 'top',
+    offsetX: -160,
   },
 ];
 
@@ -183,7 +185,7 @@ const Walkthrough = ({
   const getTooltipStyle = (): React.CSSProperties => {
     const gap = 16;
     const maxWidth = 340;
-    const centerX = targetRect.left + targetRect.width / 2;
+    const centerX = targetRect.left + targetRect.width / 2 + (currentStep.offsetX ?? 0);
     const clampedLeft = clamp(centerX - maxWidth / 2, 10, window.innerWidth - maxWidth - 10);
     const clampedCenterX = clampedLeft + maxWidth / 2;
     const spaceAbove = targetRect.top;

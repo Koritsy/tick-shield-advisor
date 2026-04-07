@@ -203,10 +203,24 @@ const Walkthrough = ({
           maxWidth: 340,
         };
       case 'top':
+        // Check if there's enough space above; if not, position below
+        const spaceAbove = targetRect.top;
+        const tooltipHeight = 200; // approximate height
+        const shouldPositionBelow = spaceAbove < tooltipHeight;
+        
+        if (shouldPositionBelow) {
+          return {
+            top: targetRect.bottom + pad + gap,
+            left: targetRect.left + targetRect.width / 2,
+            transform: 'translateX(-50%)',
+            maxWidth: 340,
+          };
+        }
+        
         return {
-          top: targetRect.top - pad - gap,
+          top: Math.max(10, targetRect.top - pad - gap - tooltipHeight),
           left: targetRect.left + targetRect.width / 2,
-          transform: 'translateX(-50%) translateY(-100%)',
+          transform: 'translateX(-50%)',
           maxWidth: 340,
         };
     }

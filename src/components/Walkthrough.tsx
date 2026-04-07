@@ -33,7 +33,7 @@ const tourSteps: TourStep[] = [
     target: 'compare-button',
     title: '4. Comparez côte à côte',
     description: 'Sélectionnez 2 solutions ou plus avec ce bouton, puis un panneau flottant apparaîtra en bas pour ouvrir le comparatif détaillé.',
-    position: 'right',
+    position: 'top',
   },
 ];
 

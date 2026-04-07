@@ -57,10 +57,7 @@ const Walkthrough = ({ open, onOpenChange }: WalkthroughProps) => {
       const targetY = currentY + rect.top - window.innerHeight / 2 + rect.height / 2;
 
       window.scrollTo({ top: targetY, behavior: 'auto' });
-      // Increased delay to let scroll settle and add smooth transition
-      setTimeout(() => {
-        setTargetRect(el.getBoundingClientRect());
-      }, 500);
+      setTargetRect(el.getBoundingClientRect());
     }
   }, [step, open]);
 

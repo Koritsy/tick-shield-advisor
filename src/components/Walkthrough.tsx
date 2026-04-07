@@ -124,9 +124,9 @@ const Walkthrough = ({ open, onOpenChange }: WalkthroughProps) => {
         };
       case 'top':
         return {
-          bottom: window.innerHeight - targetRect.top + pad + gap,
+          top: targetRect.top - pad - gap,
           left: targetRect.left + targetRect.width / 2,
-          transform: 'translateX(-50%)',
+          transform: 'translateX(-50%) translateY(-100%)',
           maxWidth: 340,
         };
     }

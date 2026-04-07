@@ -211,7 +211,7 @@ const Walkthrough = ({
         if (shouldPositionBelow) {
           return {
             top: targetRect.bottom + pad + gap,
-            left: targetRect.left + targetRect.width / 2,
+            left: targetRect.left + targetRect.width / 2 - 16,
             transform: 'translateX(-50%)',
             maxWidth: 340,
           };
@@ -219,7 +219,7 @@ const Walkthrough = ({
         
         return {
           top: Math.max(10, targetRect.top - pad - gap - tooltipHeight),
-          left: targetRect.left + targetRect.width / 2,
+          left: targetRect.left + targetRect.width / 2 - 16,
           transform: 'translateX(-50%)',
           maxWidth: 340,
         };

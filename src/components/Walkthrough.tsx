@@ -8,6 +8,7 @@ interface TourStep {
   title: string;
   description: string;
   position: 'top' | 'bottom' | 'left' | 'right';
+  offsetX?: number;
 }
 
 const tourSteps: TourStep[] = [
@@ -34,6 +35,7 @@ const tourSteps: TourStep[] = [
     title: '4. Comparez côte à côte',
     description: 'Sélectionnez 2 solutions ou plus avec ce bouton, puis un panneau flottant apparaîtra en bas pour ouvrir le comparatif détaillé.',
     position: 'top',
+    offsetX: -160,
   },
 ];
 

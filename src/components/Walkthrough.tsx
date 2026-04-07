@@ -40,12 +40,40 @@ const tourSteps: TourStep[] = [
 interface WalkthroughProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  effectivenessWeight?: number;
+  onEffectivenessChange?: (value: number) => void;
+  ecoWeight?: number;
+  onEcoChange?: (value: number) => void;
+  costWeight?: number;
+  onCostChange?: (value: number) => void;
+  healthWeight?: number;
+  onHealthChange?: (value: number) => void;
+  easeWeight?: number;
+  onEaseChange?: (value: number) => void;
+  frequencyWeight?: number;
+  onFrequencyChange?: (value: number) => void;
 }
 
-const Walkthrough = ({ open, onOpenChange }: WalkthroughProps) => {
+const Walkthrough = ({ 
+  open, 
+  onOpenChange,
+  effectivenessWeight = 50,
+  onEffectivenessChange,
+  ecoWeight = 30,
+  onEcoChange,
+  costWeight = 20,
+  onCostChange,
+  healthWeight = 30,
+  onHealthChange,
+  easeWeight = 20,
+  onEaseChange,
+  frequencyWeight = 20,
+  onFrequencyChange,
+}: WalkthroughProps) => {
   const [step, setStep] = useState(0);
   const [targetRect, setTargetRect] = useState<DOMRect | null>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const [demoCompleted, setDemoCompleted] = useState(false);
 
   const updatePosition = useCallback(() => {
     if (!open) return;
@@ -70,6 +98,58 @@ const Walkthrough = ({ open, onOpenChange }: WalkthroughProps) => {
       window.removeEventListener('scroll', updatePosition, true);
     };
   }, [updatePosition]);
+
+  // Demonstrate sliders on step 1 (filter-panel)
+  useEffect(() => {
+    if (step === 0 && open && !demoCompleted) {
+      setDemoCompleted(true);
+      
+      const startAnimation = async () => {
+        // Wait for tooltip to appear
+        await new Promise(resolve => setTimeout(resolve, 600));
+        
+        // Animate sliders to different values
+        const targetValues = [80, 60, 40, 70, 50, 65];
+        const currentValues = [effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight];
+        const setters = [onEffectivenessChange, onEcoChange, onCostChange, onHealthChange, onEaseChange, onFrequencyChange];
+        
+        for (let i = 0; i < 10; i++) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+          const progress = i / 10;
+          setters.forEach((setter, idx) => {
+            if (setter) {
+              const newValue = Math.round(currentValues[idx] + (targetValues[idx] - currentValues[idx]) * progress);
+              setter(newValue);
+            }
+          });
+        }
+        
+        // Hold for 2 seconds
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Animate back to original values
+        for (let i = 0; i < 10; i++) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+          const progress = i / 10;
+          setters.forEach((setter, idx) => {
+            if (setter) {
+              const newValue = Math.round(targetValues[idx] - (targetValues[idx] - currentValues[idx]) * progress);
+              setter(newValue);
+            }
+          });
+        }
+      };
+      
+      startAnimation();
+    }
+  }, [step, open, demoCompleted, effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight, onEffectivenessChange, onEcoChange, onCostChange, onHealthChange, onEaseChange, onFrequencyChange]);
+
+  // Reset demo flag when walkthrough closes
+  useEffect(() => {
+    if (!open) {
+      setDemoCompleted(false);
+    }
+  }, [open]);
 
   const handleClose = () => {
     setStep(0);

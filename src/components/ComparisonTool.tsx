@@ -203,7 +203,22 @@ const ComparisonTool = () => {
       )}
 
       <ComparisonModal open={compareOpen} onOpenChange={setCompareOpen} interventions={compareInterventions} />
-      <Walkthrough open={walkthroughOpen} onOpenChange={setWalkthroughOpen} />
+      <Walkthrough 
+        open={walkthroughOpen} 
+        onOpenChange={setWalkthroughOpen}
+        effectivenessWeight={effectivenessWeight}
+        onEffectivenessChange={setEffectivenessWeight}
+        ecoWeight={ecoWeight}
+        onEcoChange={setEcoWeight}
+        costWeight={costWeight}
+        onCostChange={setCostWeight}
+        healthWeight={healthWeight}
+        onHealthChange={setHealthWeight}
+        easeWeight={easeWeight}
+        onEaseChange={setEaseWeight}
+        frequencyWeight={frequencyWeight}
+        onFrequencyChange={setFrequencyWeight}
+      />
     </section>
   );
 };

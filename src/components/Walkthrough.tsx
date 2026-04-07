@@ -59,10 +59,10 @@ const Walkthrough = ({ open, onOpenChange }: WalkthroughProps) => {
       const behavior = distance < 180 ? 'auto' : 'smooth';
 
       window.scrollTo({ top: targetY, behavior });
-      // Small delay to let scroll settle
+      // Increased delay to let scroll settle and add smooth transition
       setTimeout(() => {
         setTargetRect(el.getBoundingClientRect());
-      }, 350);
+      }, 500);
     }
   }, [step, open]);
 
@@ -236,7 +236,7 @@ const Walkthrough = ({ open, onOpenChange }: WalkthroughProps) => {
 
       {/* Highlight ring */}
       <div
-        className="absolute rounded-xl ring-2 ring-primary ring-offset-2 transition-all duration-300"
+        className="absolute rounded-xl ring-2 ring-primary ring-offset-2 transition-all duration-500 ease-in-out"
         style={{
           top: highlightStyle.top,
           left: highlightStyle.left,
@@ -250,7 +250,10 @@ const Walkthrough = ({ open, onOpenChange }: WalkthroughProps) => {
       <div
         ref={tooltipRef}
         className="fixed bg-card border border-border rounded-xl shadow-2xl p-5 z-[10000] animate-fade-in"
-        style={getTooltipStyle()}
+        style={{
+          ...getTooltipStyle(),
+          transition: 'all 0.4s ease-in-out',
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         <div style={arrow.style} />

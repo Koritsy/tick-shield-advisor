@@ -185,7 +185,7 @@ const Walkthrough = ({
   const getTooltipStyle = (): React.CSSProperties => {
     const gap = 16;
     const maxWidth = 340;
-    const centerX = targetRect.left + targetRect.width / 2;
+    const centerX = targetRect.left + targetRect.width / 2 + (currentStep.offsetX ?? 0);
     const clampedLeft = clamp(centerX - maxWidth / 2, 10, window.innerWidth - maxWidth - 10);
     const clampedCenterX = clampedLeft + maxWidth / 2;
     const spaceAbove = targetRect.top;

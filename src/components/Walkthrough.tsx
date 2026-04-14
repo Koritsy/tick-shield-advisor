@@ -24,7 +24,7 @@ const tourSteps: TourStep[] = [
     title: '2. Filtrez par catégorie',
     description: 'Cliquez sur les badges pour afficher ou masquer les solutions par type : protection personnelle, aménagement paysager, gestion de la faune, etc.',
     position: 'right',
-    offsetY: -40,
+    offsetY: -80,
   },
   {
     target: 'first-card',

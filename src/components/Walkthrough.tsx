@@ -9,6 +9,7 @@ interface TourStep {
   description: string;
   position: 'top' | 'bottom' | 'left' | 'right';
   offsetX?: number;
+  offsetY?: number;
 }
 
 const tourSteps: TourStep[] = [
@@ -23,6 +24,7 @@ const tourSteps: TourStep[] = [
     title: '2. Filtrez par catégorie',
     description: 'Cliquez sur les badges pour afficher ou masquer les solutions par type : protection personnelle, aménagement paysager, gestion de la faune, etc.',
     position: 'right',
+    offsetY: -40,
   },
   {
     target: 'first-card',
@@ -195,7 +197,7 @@ const Walkthrough = ({
     switch (currentStep.position) {
       case 'right':
         return {
-          top: clamp(targetRect.top + targetRect.height / 2, 10, window.innerHeight - 10),
+          top: clamp(targetRect.top + targetRect.height / 2 + (currentStep.offsetY ?? 0), 10, window.innerHeight - 10),
           left: clamp(targetRect.right + pad + gap, 10, window.innerWidth - maxWidth - 10),
           transform: 'translateY(-50%)',
           maxWidth,

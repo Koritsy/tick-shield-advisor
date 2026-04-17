@@ -38,14 +38,18 @@ const calculateScore = (
 ): number => {
   const totalWeight = effectivenessWeight + ecoWeight + costWeight + healthWeight + easeWeight + frequencyWeight;
   if (totalWeight === 0) return 50;
-  const score =
+  const weightedScore =
     effectivenessScores[intervention.effectiveness] * (effectivenessWeight / totalWeight) +
     ecoScores[intervention.environmentalImpact] * (ecoWeight / totalWeight) +
     costScores[intervention.cost] * (costWeight / totalWeight) +
     healthSafetyScores[intervention.healthSafety] * (healthWeight / totalWeight) +
     easeOfUseScores[intervention.easeOfUse] * (easeWeight / totalWeight) +
     frequencyScores[intervention.applicationFrequency] * (frequencyWeight / totalWeight);
-  return score;
+
+  // Apply category factor (proximal/personal = 100, distal/environmental = 50)
+  const finalScore = (weightedScore * intervention.categoryScore) / 100;
+  
+  return finalScore;
 };
 
 const ComparisonTool = () => {

@@ -327,7 +327,7 @@ export const interventions: Intervention[] = [
     environmentalDetails: 'Nocif pour l\'environnement et les espèces non ciblées. La perméthrine est toxique pour les écosystèmes aquatiques et les abeilles.',
     environmentalEvidence: 'strong',
     healthSafety: 'risk',
-    healthRisks: 'Certains produits sont toxiques pour les humains. Les chats sont particulièrement sensibles à la perméthrine. Selon l\'INSPQ, la perméthrine serait peu toxique pour l\'humain',
+    healthRisks: 'Selon l\'INSPQ, la perméthrine serait peu toxique pour l\'humain. Il faut bien identifier les ingrédients actifs et suivre les recommandations du frabricant. Les chats sont particulièrement sensibles à la perméthrine.',
     healthEvidence: 'strong',
     availability: 'Produits à faire soi-même disponibles en quincaillerie. Application professionnelle interdite au Québec.',
     applicationFrequency: 'seasonal',

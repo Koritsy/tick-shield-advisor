@@ -482,7 +482,7 @@ export const interventions: Intervention[] = [
     costDetails: '25-155 $ par pied linéaire',
     annualInvestment: '1 000-6 200 $/an (amorti sur 10 ans)',
     effectiveness: 'high',
-    effectivenessDetails: 'Plus efficace pour les grandes propriétés ou lorsque la clôture maintient les cerfs loin de la propriété. L\'effet s\'améliore après 5 ans. Effet minimal pour les petits terrains.',
+    effectivenessDetails: 'Certaines études montrent une réduction du nombre de nymphes dans l\'environnement d\'environ 50% à 90% à une distance de 10 mètres ou plus de la clôture. Par conséquent, les clôtures semblent plus efficace pour les grandes propriétés ou lorsque la clôture maintient les cerfs loin de la propriété. L\'effet s\'améliore après 5 ans. Effet minimal pour les petits terrains.',
     evidenceQuality: 'strong',
     effectivenessEvidence: 'strong',
     environmentalImpact: 'caution',

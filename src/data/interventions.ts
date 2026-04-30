@@ -157,7 +157,7 @@ export const interventions: Intervention[] = [
     cost: 'medium',
     costDetails: 'À partir de 15 $ par 100 ml',
     annualInvestment: '~960 $/an (pour une utilisation fréquente)',
-    effectiveness: 'low',
+    effectiveness: 'medium',
     effectivenessDetails: 'La nootkatone (qui vient du cèdre jaune de l\'Alaska) et le carvacrol (présent des les huiles de certaines herbes comme l\'origan) seraient les plus efficaces selon les études. L\'efficacité serait semblable à celle du DEET, mais de plus courte durée. L\'application doit être répétée régulièrement.',
     evidenceQuality: 'weak',
     effectivenessEvidence: 'weak',

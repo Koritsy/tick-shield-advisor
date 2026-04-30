@@ -536,7 +536,7 @@ export const interventions: Intervention[] = [
     costDetails: '25 $ pour 6 tubes',
     annualInvestment: '~100 $/an',
     effectiveness: 'medium',
-    effectivenessDetails: 'Bonne efficacité pour réduire les tiques sur les souris mais pas nécessairement d\'effets significatif sur la densité de tiques dans l\'environnement (certaines études démontrent tout de même un effet sur la densité de tiques). Fonctionne seulement dans les endroits fréquentés par les souris. Doit être placé sur le terrain au bon moment dans la saison. L\'effet n\'est pas observé à court terme (réduction des nymphes en quête l\'année suivante). Résultats contradictoires selon les études, effet possiblement réduit s\'il y a une forte densité de souris. Efficacité pour réduire les cas humains incertaine',
+    effectivenessDetails: 'Bonne efficacité pour réduire les tiques sur les souris mais l\'effet démontré sur la densité de tiques dans l\'environnement est inconstant d\'une étude à l\'autre. Fonctionne seulement dans les endroits fréquentés par les souris. Doit être placé sur le terrain au bon moment dans la saison. L\'effet voulu est rarement atteint au cours de la saison où les tubes sont utilisés, mais se mainifeste davantage au cours de l\'été suivant (par exemple, le fait de tuer les larves sur les souris entraîne une réduction des nymphes dans l\'environnement l\'année suivante). Résultats contradictoires selon les études, effet possiblement réduit s\'il y a une forte densité de souris. Efficacité pour réduire les cas humains incertaine',
     evidenceQuality: 'strong',
     effectivenessEvidence: 'strong',
     environmentalImpact: 'caution',

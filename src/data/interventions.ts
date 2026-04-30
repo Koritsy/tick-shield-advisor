@@ -266,7 +266,7 @@ export const interventions: Intervention[] = [
     costDetails: 'Écopavage : environ 10-12 $ le pied carré; Dalles de caoutchouc : à partir de 6 $ chaque (16" carré); Copeaux de caoutchouc : à partir de 3 $ par pied carré',
     annualInvestment: '90-600 $ (amorti sur 10 ans)',
     effectiveness: 'unknown',
-    effectivenessDetails: 'Effets non quantifiés/inconnu. Aucune preuve connue. Il est théoriquement posssible qu\'une surface en caouthcouc bien drainée et sèche ne soit pas attirante pour les tiques et défavorise leur survie',
+    effectivenessDetails: 'Effets non quantifiés/inconnu. Aucune preuve connue. Il est théoriquement posssible qu\'une surface en caoutchouc bien drainée et sèche ne soit pas attirante pour les tiques et défavorise leur survie',
     evidenceQuality: 'weak',
     effectivenessEvidence: 'weak',
     environmentalImpact: 'caution',

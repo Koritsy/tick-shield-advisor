@@ -61,7 +61,7 @@ export const interventions: Intervention[] = [
     healthEvidence: 'na',
     availability: 'Toujours disponible — changement de comportement uniquement.',
     applicationFrequency: 'frequent',
-    applicationFrequencyDetails: 'À chaque sortie extérieure.',
+    applicationFrequencyDetails: 'À chaque sortie dans une zone à risque.',
   },
   {
     id: 'deet-repellent',

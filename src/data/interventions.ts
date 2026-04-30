@@ -428,7 +428,7 @@ export const interventions: Intervention[] = [
     costDetails: 'Support à bois de chauffage : 20-200 $+',
     annualInvestment: '20-300 $ (utilisation multi-années)',
     effectiveness: 'low',
-    effectivenessDetails: 'Aucun effet observé dans les études.',
+    effectivenessDetails: 'Aucun effet observé dans les études. Théoriquement, le fait de réduire les abris pour rongeurs et le nombre de rongeurs sur le terrain réduirait également le nombre de tiques infectées dans l\'environnement',
     evidenceQuality: 'weak',
     effectivenessEvidence: 'weak',
     environmentalImpact: 'safe',

@@ -131,7 +131,7 @@ export const interventions: Intervention[] = [
     costDetails: 'À partir de 45 $ pour le haut et de 100 $ pour le bas, 15 $+ pour le chapeau. Durabilité de 1 an',
     annualInvestment: '~150 $/an',
     effectiveness: 'high',
-    effectivenessDetails: 'L’utilisation adéquate des vêtements imprégnés de perméthrine permet de réduire les risques d’être piqué par une tique d\'au moins 50%. Efficacité réduite après plusieurs lavages/séchages (50-90 % après 16 lavages). Perte d\'efficacité après 1 an.',
+    effectivenessDetails: 'L’utilisation adéquate des vêtements imprégnés de perméthrine permet de réduire les risques d’être piqué par une tique d\'au moins 50%. Le système nerveux des tiques est affecté après 1 minute d\'exposition au tissu traité et elles perdent leur capacité à piquer. Efficacité réduite après plusieurs lavages/séchages (50-90 % après 16 lavages). Perte d\'efficacité après 1 an.',
     evidenceQuality: 'strong',
     effectivenessEvidence: 'strong',
     environmentalImpact: 'caution',

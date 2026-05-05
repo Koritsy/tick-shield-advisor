@@ -721,7 +721,7 @@ export const interventions: Intervention[] = [
     frequencyScore: 40,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Moyen : On doit déposer l\'appât dans des boîtiers à appâts pour souris verrouillés et à l\'épreuve des autres animaux. La fabrication de l\'appât requiert un peu de temps, tout comme le remplissage des boîtiers. La dispersion des boîtiers requiert que l\'on se déplace sur le terrain ce qui ne requiert pas un gros effort sauf si le terrain est grand, accidenté, en pente, etc.',
-    instructions: 'Placer les boîtes remplies d\'appâts dans des endroits stratégiques autour du terrain (le nombre idéal de boîtes est de 4 à 5 par 1000 m²)). L\'appât doit être remplacé toutes les 2 semaines.',
+    instructions: 'Placer les boîtes remplies d\'appâts dans des endroits stratégiques autour du terrain (le nombre idéal de boîtes est de 4 à 5 par 1000 m²). L\'appât doit être remplacé toutes les 2 semaines.',
     cost: 'low',
     costDetails: 'Stations vendues en quincaillerie (environ 4,50 $ chacune).',
     annualInvestment: '~63 $/an (14 stations pour 10 000 pi²). Les coûts de l\'appât sont à déterminer.',

@@ -57,6 +57,12 @@ export interface Intervention {
   healthScore: number;
   easeScore: number;
   frequencyScore: number;
+  effectiveness: EffectivenessLevel;
+  environmentalImpact: EcoLevel;
+  cost: CostLevel;
+  healthSafety: HealthSafetyLevel;
+  easeOfUse: EaseOfUseLevel;
+  applicationFrequency: ApplicationFrequency;
   easeOfUseDetails: string;
   instructions: string;
   costDetails: string;
@@ -86,6 +92,12 @@ export const interventions: Intervention[] = [
     healthScore: 100,
     easeScore: 90,
     frequencyScore: 10,
+    effectiveness: 'low',
+    environmentalImpact: 'safe',
+    cost: 'low',
+    healthSafety: 'safe',
+    easeOfUse: 'easy',
+    applicationFrequency: 'frequent',
     easeOfUseDetails: 'Ne nécessite aucun équipement. Cependant, certaines habitudes sont difficiles à modifier. Il faut prendre le temps de faire l\'inspection de façon minutieuse et il peut être difficile de s\'auto-inspecter dans le dos et à l\'arrière de la tête. ',
     instructions: 'A. Favoriser les zones à faible risque (par exemple, en forêt, marcher sur les sentiers). B. Se protèger si on est dans une zone à risque (par exemple, porter des vêtements appropriés et utilier un insectifuge lors des travaux de jardinage ou si on s\'aventure hors des sentiers). C. Inspecter le corps attentivement de la tête au pieds après être allé dans une zone à risque: portez attention particulière à: la tête, les cheveux, les oreilles, autour des oreilles, les aisselles, le nombril, l\'aine, l\'arrière des genoux et entre les orteils.',
     costDetails: 'Gratuit',
@@ -113,6 +125,12 @@ export const interventions: Intervention[] = [
     healthScore: 100,
     easeScore: 100,
     frequencyScore: 10,
+    effectiveness: 'medium',
+    environmentalImpact: 'safe',
+    cost: 'medium',
+    healthSafety: 'safe',
+    easeOfUse: 'easy',
+    applicationFrequency: 'frequent',
     easeOfUseDetails: 'Facile à appliquer.',
     instructions: 'Asperger sur les vêtements et la peau chaque fois qu\'une exposition aux tiques est prévue. Éviter les yeux et le visage. L\'application doit être répétée si l\'exposition dure plusieurs heures. Peu d\'effort requis: Prends 1-2 minutes additionelles.',
     costDetails: '8-20 $ par 100 ml',

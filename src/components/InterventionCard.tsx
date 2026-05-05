@@ -178,7 +178,7 @@ const InterventionCard = ({ intervention, rank, isComparing = false, isEssential
             <DetailSection icon={<HeartPulse className="h-4 w-4 text-primary" />} title="Santé et sécurité" content={intervention.healthRisks}
               evidenceQuality={intervention.healthEvidence} />
             <DetailSection icon={<DollarSign className="h-4 w-4 text-primary" />} title="Détails des coûts" content={`${intervention.costDetails}. Investissement annuel : ${intervention.annualInvestment}`} />
-            <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={`${intervention.easeOfUseDetails} ${intervention.availability}`} />
+            <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={intervention.easeOfUseDetails} />
             <DetailSection icon={<Clock className="h-4 w-4 text-primary" />} title="Fréquence d'application" content={intervention.applicationFrequencyDetails} />
             <DetailSection icon={<Info className="h-4 w-4 text-primary" />} title="Disponibilité" content={intervention.availability} />
 

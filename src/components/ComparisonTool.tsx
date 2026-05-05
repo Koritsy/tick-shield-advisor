@@ -66,7 +66,6 @@ const ComparisonTool = () => {
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
   const [walkthroughOpen, setWalkthroughOpen] = useState(true);
-  const [showAllSolutions, setShowAllSolutions] = useState(false);
 
   const handleCategoryToggle = (category: string) => {
     setSelectedCategories((prev) =>
@@ -96,22 +95,6 @@ const ComparisonTool = () => {
   }, [effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight, selectedCategories]);
 
   const requiredIds = ['protective-behaviors', 'self-check'];
-  const requiredInterventions = requiredIds
-    .map((id) => interventions.find((intervention) => intervention.id === id))
-    .filter((intervention): intervention is Intervention => Boolean(intervention));
-
-  const requiredWithScore = requiredInterventions.map((intervention) => {
-    const found = rankedInterventions.find((item) => item.intervention.id === intervention.id);
-    const score = found ? found.score : calculateScore(intervention, effectivenessWeight, ecoWeight, costWeight, healthWeight, easeWeight, frequencyWeight);
-    return { intervention, score };
-  });
-
-  const additionalRecommended = rankedInterventions
-    .filter(({ intervention }) => !requiredIds.includes(intervention.id))
-    .slice(0, 3);
-
-  const recommendedGroup = [...requiredWithScore, ...additionalRecommended];
-  const displayedInterventions = showAllSolutions ? rankedInterventions : recommendedGroup;
 
   return (
     <section id="compare" className="py-12 md:py-16 gradient-nature">
@@ -131,7 +114,7 @@ const ComparisonTool = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-1" data-tour="filter-panel">
-            <div className="lg:sticky lg:top-24">
+            <div className="lg:sticky lg:top-24 max-h-[calc(100vh-6rem)] overflow-y-auto">
               <FilterPanel
                 effectivenessWeight={effectivenessWeight}
                 ecoWeight={ecoWeight}
@@ -153,26 +136,19 @@ const ComparisonTool = () => {
 
           <div className="lg:col-span-3">
             <div className="flex flex-col gap-2 mb-4">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div>
-                  <h3 className="text-lg font-semibold">{showAllSolutions ? 'Toutes les solutions' : "Recommandation d'ensemble"}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {showAllSolutions
-                      ? 'Affichage de toutes les interventions correspondant aux filtres de catégorie et de priorité.'
-                      : "Pour renforcer votre protection, adoptez d'abord les mesures essentielles, puis combinez-les avec des solutions bien adaptées à votre situation."}
-                  </p>
-                </div>
-                <Button size="sm" variant="outline" onClick={() => setShowAllSolutions((prev) => !prev)}>
-                  {showAllSolutions ? 'Voir recommandations' : 'Voir toutes les solutions'}
-                </Button>
+              <div>
+                <h3 className="text-lg font-semibold">Toutes les solutions</h3>
+                <p className="text-sm text-muted-foreground">
+                  Affichage de toutes les interventions correspondant aux filtres de catégorie et de priorité.
+                </p>
               </div>
               <span className="text-sm text-muted-foreground">
-                {showAllSolutions ? rankedInterventions.length : recommendedGroup.length} {showAllSolutions ? 'interventions trouvées' : 'interventions recommandées (dont 2 obligatoires)'}
+                {rankedInterventions.length} interventions trouvées
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {displayedInterventions.map(({ intervention }, index) => (
+              {rankedInterventions.map(({ intervention }, index) => (
                 <InterventionCard
                   key={intervention.id}
                   intervention={intervention}

@@ -7,6 +7,43 @@ export type EvidenceQuality = 'strong' | 'weak';
 export type AspectEvidenceQuality = 'strong' | 'weak' | 'na';
 export type ApplicationFrequency = 'once' | 'seasonal' | 'regular' | 'frequent';
 
+export const scoreToEffectiveness = (score: number): EffectivenessLevel => {
+  if (score >= 70) return 'high';
+  if (score >= 35) return 'medium';
+  return 'low';
+};
+
+export const scoreToEco = (score: number): EcoLevel => {
+  if (score >= 75) return 'safe';
+  if (score >= 40) return 'caution';
+  return 'risk';
+};
+
+export const scoreToCost = (score: number): CostLevel => {
+  if (score >= 75) return 'low';
+  if (score >= 40) return 'medium';
+  return 'high';
+};
+
+export const scoreToHealth = (score: number): HealthSafetyLevel => {
+  if (score >= 75) return 'safe';
+  if (score >= 40) return 'caution';
+  return 'risk';
+};
+
+export const scoreToEase = (score: number): EaseOfUseLevel => {
+  if (score >= 75) return 'easy';
+  if (score >= 35) return 'medium';
+  return 'hard';
+};
+
+export const scoreToFrequency = (score: number): ApplicationFrequency => {
+  if (score >= 90) return 'once';
+  if (score >= 60) return 'seasonal';
+  if (score >= 35) return 'regular';
+  return 'frequent';
+};
+
 export interface Intervention {
   id: string;
   name: string;
@@ -14,24 +51,24 @@ export interface Intervention {
   category: 'personal' | 'landscaping' | 'wildlife' | 'other';
   categoryLabel: string;
   categoryScore: number;
-  easeOfUse: EaseOfUseLevel;
+  effectivenessScore: number;
+  ecoScore: number;
+  costScore: number;
+  healthScore: number;
+  easeScore: number;
+  frequencyScore: number;
   easeOfUseDetails: string;
   instructions: string;
-  cost: CostLevel;
   costDetails: string;
   annualInvestment: string;
-  effectiveness: EffectivenessLevel;
   effectivenessDetails: string;
   evidenceQuality: EvidenceQuality;
   effectivenessEvidence: AspectEvidenceQuality;
-  environmentalImpact: EcoLevel;
   environmentalDetails: string;
   environmentalEvidence: AspectEvidenceQuality;
-  healthSafety: HealthSafetyLevel;
   healthRisks: string;
   healthEvidence: AspectEvidenceQuality;
   availability: string;
-  applicationFrequency: ApplicationFrequency;
   applicationFrequencyDetails: string;
 }
 
@@ -43,24 +80,24 @@ export const interventions: Intervention[] = [
     category: 'personal',
     categoryLabel: 'Protection personnelle',
     categoryScore: 100,
-    easeOfUse: 'easy',
+    effectivenessScore: 5,
+    ecoScore: 100,
+    costScore: 100,
+    healthScore: 100,
+    easeScore: 90,
+    frequencyScore: 10,
     easeOfUseDetails: 'Ne nécessite aucun équipement. Cependant, certaines habitudes sont difficiles à modifier. Il faut prendre le temps de faire l\'inspection de façon minutieuse et il peut être difficile de s\'auto-inspecter dans le dos et à l\'arrière de la tête. ',
     instructions: 'A. Favoriser les zones à faible risque (par exemple, en forêt, marcher sur les sentiers). B. Se protèger si on est dans une zone à risque (par exemple, porter des vêtements appropriés et utilier un insectifuge lors des travaux de jardinage ou si on s\'aventure hors des sentiers). C. Inspecter le corps attentivement de la tête au pieds après être allé dans une zone à risque: portez attention particulière à: la tête, les cheveux, les oreilles, autour des oreilles, les aisselles, le nombril, l\'aine, l\'arrière des genoux et entre les orteils.',
-    cost: 'low',
     costDetails: 'Gratuit',
     annualInvestment: '0 $',
-    effectiveness: 'medium',
     effectivenessDetails: 'Bien que l\'effet des comportements préventifs est difficile à mesurer, il est important de les adopter. Plusieurs comportements préventifs ont aussi des effets positifs sur la faune et l\'environnement et peuvent aussi réduire le contact avec d\'autres insectes piqueurs ou avec des plantes nuisibles.',
     evidenceQuality: 'weak',
     effectivenessEvidence: 'weak',
-    environmentalImpact: 'safe',
     environmentalDetails: 'Aucun impact environnemental.',
     environmentalEvidence: 'na',
-    healthSafety: 'safe',
     healthRisks: 'Effet protecteur — aucun risque.',
     healthEvidence: 'na',
     availability: 'Toujours disponible — changement de comportement uniquement.',
-    applicationFrequency: 'frequent',
     applicationFrequencyDetails: 'À chaque sortie dans une zone à risque.',
   },
   {
@@ -70,24 +107,24 @@ export const interventions: Intervention[] = [
     category: 'personal',
     categoryLabel: 'Protection personnelle',
     categoryScore: 100,
-    easeOfUse: 'easy',
+    effectivenessScore: 60,
+    ecoScore: 100,
+    costScore: 70,
+    healthScore: 100,
+    easeScore: 100,
+    frequencyScore: 10,
     easeOfUseDetails: 'Facile à appliquer.',
     instructions: 'Asperger sur les vêtements et la peau chaque fois qu\'une exposition aux tiques est prévue. Éviter les yeux et le visage. L\'application doit être répétée si l\'exposition dure plusieurs heures. Peu d\'effort requis: Prends 1-2 minutes additionelles.',
-    cost: 'low',
     costDetails: '8-20 $ par 100 ml',
     annualInvestment: '~320 $/an (pour une utilisation fréquente)',
-    effectiveness: 'high',
     effectivenessDetails: 'Haute performance à une concentration de 20-30 %. Semble plus efficace lorsqu\'appliqué sur les vêtements (réduction de l\'exposition aux tiques de ~80%) comparativement à une application sur la peau (réduction de 40-60%).',
     evidenceQuality: 'strong',
     effectivenessEvidence: 'strong',
-    environmentalImpact: 'safe',
     environmentalDetails: 'Aucun impact environnemental connu selon l\'Agence de protection environnementale américaine (EPA).',
     environmentalEvidence: 'na',
-    healthSafety: 'safe',
     healthRisks: 'Icaridine : risque très faible. DEET : rare irritation cutanée/oculaire, effets neurologiques extrêmement rares.',
     healthEvidence: 'strong',
     availability: 'Facilement disponible en pharmacie, magasins de plein air et en ligne.',
-    applicationFrequency: 'frequent',
     applicationFrequencyDetails: 'Réappliquer après quelques heures lors d\'une exposition.',
   },
   {
@@ -97,6 +134,12 @@ export const interventions: Intervention[] = [
     category: 'personal',
     categoryLabel: 'Protection personnelle',
     categoryScore: 100,
+    effectivenessScore: 20,
+    ecoScore: 100,
+    costScore: 100,
+    healthScore: 100,
+    easeScore: 90,
+    frequencyScore: 15,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — utiliser des vêtements existants.',
     instructions: 'Rentrer le bas des pantalons à l\'intérieur des chaussettes, rentrer la chemise dans les pantalons. Exposer le moins de peau possible. Peu d\'effort requis: Prends 1-2 minutes additionelles.',
@@ -124,6 +167,12 @@ export const interventions: Intervention[] = [
     category: 'personal',
     categoryLabel: 'Protection personnelle',
     categoryScore: 100,
+    effectivenessScore: 70,
+    ecoScore: 100,
+    costScore: 80,
+    healthScore: 100,
+    easeScore: 100,
+    frequencyScore: 15,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile : Même mode d\'emploi que des vêtements réguliers mais protection supérieure.',
     instructions: 'Rentrer le bas des pantalons à l\'intérieur des chaussettes, rentrer la chemise dans les pantalons. Peu d\'effort requis: Prends 1-2 minutes additionelles. Plus le temps de contact entre la tique et le vêtement est long, plus l\'efficacité est grande. L\'efficacité est donc réduite si le contact avec la tique en quête survient près de la peau non couverte (mains, cou).',
@@ -151,6 +200,12 @@ export const interventions: Intervention[] = [
     category: 'personal',
     categoryLabel: 'Protection personnelle',
     categoryScore: 100,
+    effectivenessScore: 50,
+    ecoScore: 100,
+    costScore: 1,
+    healthScore: 100,
+    easeScore: 100,
+    frequencyScore: 15,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile.',
     instructions: 'Asperger sur les vêtements et la peau. Éviter les yeux et le visage. L\'application doit être répétée régulièrement. Peu d\'effort requis: Prend 1-2 minutes additionelles.',
@@ -178,6 +233,12 @@ export const interventions: Intervention[] = [
     category: 'personal',
     categoryLabel: 'Protection personnelle',
     categoryScore: 100,
+    effectivenessScore: 60,
+    ecoScore: 50,
+    costScore: 90,
+    healthScore: 75,
+    easeScore: 100,
+    frequencyScore: 15,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile.',
     instructions: 'Asperger sur les vêtements et attendre que le produit soit complètement séché avant d\'enfiler les vêtements. Peu d\'effort requis pour l\'application mais on doit attendre que le produit soit complètement sec avant d\'enfiler les vêtements. Selon le manufacturier Insect Shield, le traitement dure 60 jours ou 6 lavages.',
@@ -205,6 +266,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 37,
+    ecoScore: 75,
+    costScore: 60,
+    healthScore: 100,
+    easeScore: 30,
+    frequencyScore: 75,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — nécessite un travail physique d\'installation.',
     instructions: 'Étendre une couche de copeaux de 1m de largeur et 5cm de profondeur à la bordure du terrain ou du sentier. Dépendant de la grosseur du terrain, l\'application peut prendre plus d\'une journée.',
@@ -232,6 +299,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 5,
+    ecoScore: 100,
+    costScore: 1,
+    healthScore: 75,
+    easeScore: 10,
+    frequencyScore: 100,
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficile — peut nécessiter l\'aide d\'un professionnel.',
     instructions: 'Étendre une couche de pierres/gravier à la bordure du terrain ou du sentier (pas d\'information disponible sur les spécifications nécessaires). Effort considérable requis car le gravier est lourd et on doit employer de l\'équipement (brouette, pelle, rateau, etc). Dépendant de la grosseur du terrain, l\'application peut prendre plus d\'une journée.',
@@ -259,6 +332,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 5,
+    ecoScore: 75,
+    costScore: 40,
+    healthScore: 100,
+    easeScore: 30,
+    frequencyScore: 100,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Moyen : L\'écopavé doit être installé par un paysagiste spécialisé. Les copeaux ou dalles de caoutchouc peuvent être installés soi-même mais pourraient nécessiter l\'aide d\'un ouvrier ou d\'un paysagiste.',
     instructions: 'L\'écopavé est installé par un paysagiste spécialisé (le produit doit être coulé et étendu comme de l\'asphalte). Les dalles ou copeaux peuvent être placés dans l\'aménagement pour créer un sentier ou sous une aire de jeu/table à pique-nique, autour d\'un cabanon etc. Effort de l\'installation peut être significatif si l\'on fait nous-même.',
@@ -286,6 +365,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 5,
+    ecoScore: 75,
+    costScore: 50,
+    healthScore: 100,
+    easeScore: 50,
+    frequencyScore: 75,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Moyen : peut nécessiter l\'aide d\'un ouvrier ou paysagiste.',
     instructions: 'Planter des végétaux, arbustes et arbres qui ont mauvais goût/odeur pour les cerfs (certains repousseraient les tiques). Les plantes connues comme étant désagréables pour les cerfs sont répertoriées dans l\'étude de Ward publiée en (2000). Effort considérable requis car on doit creuser et préparer le terrain avant de planter. On doit employer de l\'équipement (brouette, pelle, bêche, râteau, etc). Dépendant de la grosseur du terrain, l\'installation peut prendre plus d\'une journée.',
@@ -313,6 +398,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 90,
+    ecoScore: 1,
+    costScore: 70,
+    healthScore: 75,
+    easeScore: 60,
+    frequencyScore: 60,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne.',
     instructions: 'Asperger le terrain à l\'aide d\'un pulvérisateur à pompe. Peu d\'effort: facile à appliquer avec un pulvérisateur mais peu prendre du temps selon la grosseur du terrain. Du temps est également nécessaire pour la préparation du produit si celui-ci doit être dilué.',
@@ -340,6 +431,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 70,
+    ecoScore: 75,
+    costScore: 60,
+    healthScore: 75,
+    easeScore: 60,
+    frequencyScore: 40,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — appliquer avec un pulvérisateur.',
     instructions: 'Asperger le terrain à l\'aide d\'un pulvérisateur à pompe. Peu d\'effort: facile à appliquer avec un pulvérisateur mais peu prendre du temps selon la grosseur du terrain. Il est préférable de faire des tests sur une zone limitée avant l\'usage pour vérifier la toxicité pour les végétaux.',
@@ -367,6 +464,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 50,
+    ecoScore: 75,
+    costScore: 60,
+    healthScore: 100,
+    easeScore: 60,
+    frequencyScore: 40,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — appliquer avec un pulvérisateur, réappliquer régulièrement.',
     instructions: 'Asperger le terrain à l\'aide d\'un pulvérisateur à pompe. Peu d\'effort: facile à appliquer avec un pulvérisateur mais peu prendre du temps selon la grosseur du terrain. Du temps est également nécessaire pour la préparation du produit si celui-ci doit être dilué. Doit être réappliqué tous les 2 à 3 semaines.',
@@ -394,6 +497,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 37,
+    ecoScore: 75,
+    costScore: 1,
+    healthScore: 75,
+    easeScore: 40,
+    frequencyScore: 40,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — tâches d\'entretien régulières.',
     instructions: 'Il faut adopter des mesures de protection personnelles pour faire cet entretien dans les zones à risque. Ramasser les feuilles régulièrement. Tondre le gazon. Ne pas laisser de la nourriture dehors sur le terrain, ne pas entreposer d\'appats de chasse, installer la mangeoire à oiseaux loin de la maison. Effort et temps nécessaire varient selon la grosseur du terrain. Peut s\'avérer laborieux.',
@@ -421,6 +530,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 5,
+    ecoScore: 100,
+    costScore: 10,
+    healthScore: 100,
+    easeScore: 20,
+    frequencyScore: 100,
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficulté moyenne à élevée — nécessite un déplacement de matériaux lourds.',
     instructions: 'Entreposer le bois loin des zones fréquemment utilisées, dans un endroit sec et surelevé (par exemple sur un rack à bois) et dans lequel les souris ne peuvent pas grimper. Peut s\'avérer laborieux de déplacer le bois surtout s\'il y a une grosse quantité. Nécessite de l\'équipement.',
@@ -448,6 +563,12 @@ export const interventions: Intervention[] = [
     category: 'landscaping',
     categoryLabel: 'Aménagement paysager',
     categoryScore: 50,
+    effectivenessScore: 5,
+    ecoScore: 75,
+    costScore: 1,
+    healthScore: 100,
+    easeScore: 2,
+    frequencyScore: 100,
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficile pour l\'installation. Peut nécessiter l\'aide d\'un paysagiste.',
     instructions: 'Habituellement fait pour des raisons esthétiques. Aménagement d\'un cours d\'eau en bordure de terrain : creuser, installer gravier de fond, doublure perméable, pompe, tuyauterie, roches, plantes aquatiques (lumières et filtration facultatif). Remplir d\'eau. Effort et temps significatif si on le fait soi-même.',
@@ -475,6 +596,12 @@ export const interventions: Intervention[] = [
     category: 'wildlife',
     categoryLabel: 'Gestion de la faune',
     categoryScore: 50,
+    effectivenessScore: 55,
+    ecoScore: 75,
+    costScore: 1,
+    healthScore: 100,
+    easeScore: 10,
+    frequencyScore: 100,
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficile — installation professionnelle souvent nécessaire.',
     instructions: 'La clôture doit être 7 à 10 pieds de hauteur. Peut être très laborieux, nécessite une certaine expertise et beaucoup de temps (au moins une journée pour un petit terrain ou plusieurs jours si le terrain est grand). Les clôtures en maillons de plastique malléable sont plus facile (et moins coûteuse) à installer.',
@@ -502,6 +629,12 @@ export const interventions: Intervention[] = [
     category: 'wildlife',
     categoryLabel: 'Gestion de la faune',
     categoryScore: 50,
+    effectivenessScore: 5,
+    ecoScore: 100,
+    costScore: 38,
+    healthScore: 100,
+    easeScore: 60,
+    frequencyScore: 40,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile à appliquer sur les plantes et surfaces.',
     instructions: 'Selon le format, étendre ou asperger sur les plantes et surfaces autour du terrain. Répéter l\'application régulièrement (minimum aux 6 à 8 semaines) et après la pluie. Il est recommandé d\'utiliser différents produits en alternance pour éviter que les cerfs s\'accoutument à l\'odeur/goût du répulsif. Effort moyen requis: très facile à appliquer mais peu prendre du temps si on a une grande superficie à couvrir et doit être répété souvent.',
@@ -529,6 +662,12 @@ export const interventions: Intervention[] = [
     category: 'wildlife',
     categoryLabel: 'Gestion de la faune',
     categoryScore: 50,
+    effectivenessScore: 50,
+    ecoScore: 50,
+    costScore: 90,
+    healthScore: 100,
+    easeScore: 90,
+    frequencyScore: 75,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — placer les tubes dans les zones fréquentées par les souris.',
     instructions: 'Placer les tubes dans des endroits stratégiques fréquentés par les souris, autour du terrain à 10 mètres d\'intervalle. Disposer au printemps et répéter mi-été. Effort léger, on peu disperser les tubes en peu de temps en se déplaçant autour du terrain.',
@@ -556,6 +695,12 @@ export const interventions: Intervention[] = [
     category: 'wildlife',
     categoryLabel: 'Gestion de la faune',
     categoryScore: 50,
+    effectivenessScore: 50,
+    ecoScore: 50,
+    costScore: 94,
+    healthScore: 100,
+    easeScore: 70,
+    frequencyScore: 40,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Moyen : On doit déposer l\'appât dans des boîtiers à appâts pour souris verrouillés et à l\'épreuve des autres animaux. La fabrication de l\'appât requiert un peu de temps, tout comme le remplissage des boîtiers. La dispersion des boîtiers requiert que l\'on se déplace sur le terrain ce qui ne requiert pas un gros effort sauf si le terrain est grand, accidenté, en pente, etc.',
     instructions: 'Placer les boîtes remplies d\'appâts dans des endroits stratégiques autour du terrain (le nombre idéal de boîtes est de 4 à 5 par 1000 m²)). L\'appât doit être remplacé toutes les 2 semaines.',
@@ -583,6 +728,12 @@ export const interventions: Intervention[] = [
     category: 'wildlife',
     categoryLabel: 'Gestion de la faune',
     categoryScore: 50,
+    effectivenessScore: 50,
+    ecoScore: 50,
+    costScore: 70,
+    healthScore: 100,
+    easeScore: 70,
+    frequencyScore: 40,
     easeOfUse: 'hard',
     easeOfUseDetails: 'Difficile : le terrain doit être plat et le dispositif doit être inaccessible aux enfants tout en restant accessible aux cerfs.',
     instructions: 'Doit être installé par un professionnel. Un dispositif traite les cerfs dans un rayon de 50 acres. Effort : l\'appât doit être remplacé chaque semaine ce qui implique le déplacement avec la charge de nourriture jusqu\'au dispositif, l\'entretien et nettoyage du dispositif, l\'achat d\'appâts, etc.',
@@ -610,6 +761,12 @@ export const interventions: Intervention[] = [
     category: 'wildlife',
     categoryLabel: 'Gestion de la faune',
     categoryScore: 50,
+    effectivenessScore: 5,
+    ecoScore: 50,
+    costScore: 50,
+    healthScore: 50,
+    easeScore: 80,
+    frequencyScore: 40,
     easeOfUse: 'medium',
     easeOfUseDetails: 'Difficulté moyenne — peut nécessiter un exterminateur.',
     instructions: 'Les souris peuvent être attirées dans le piège à l\'aide de beurre d\'arachide. Peu d\'effort pour disposer les pièges mais effort de gestion de souris (morte ou vivante) une fois prise. Effort pour nettoyer les pièges après l\'utilisation. Peu d\'effort si on fait venir un exterminateur.',
@@ -637,6 +794,12 @@ export const interventions: Intervention[] = [
     category: 'other',
     categoryLabel: 'Autre',
     categoryScore: 25,
+    effectivenessScore: 5,
+    ecoScore: 50,
+    costScore: 80,
+    healthScore: 100,
+    easeScore: 100,
+    frequencyScore: 75,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — traitement oral ou topique selon prescription vétérinaire.',
     instructions: 'Traitement en forme de croquette à donner oralement ou en liquide topique à appliquer sur la peau de l\'animal au niveau de la nuque. Doit être répété tous les 4-12 semaines dépendant du produit/espèce. Effort/temps moyen car il faut prendre le temps de se déplacer chez le vétérinaire avec notre animal. La manipulation de l\'animal peut être difficile par la suite si ce dernier doit être contentionné pendant l\'application.',

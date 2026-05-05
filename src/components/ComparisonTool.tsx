@@ -6,26 +6,7 @@ import Walkthrough from './Walkthrough';
 import { Button } from '@/components/ui/button';
 import { GitCompareArrows, X, HelpCircle } from 'lucide-react';
 import { interventions } from '@/data/interventions';
-import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency } from '@/data/interventions';
-
-const effectivenessScores: Record<EffectivenessLevel, number> = {
-  high: 100, medium: 60, low: 30, unknown: 40,
-};
-const ecoScores: Record<EcoLevel, number> = {
-  safe: 100, caution: 50, risk: 10,
-};
-const costScores: Record<CostLevel, number> = {
-  low: 100, medium: 60, high: 20,
-};
-const healthSafetyScores: Record<HealthSafetyLevel, number> = {
-  safe: 100, caution: 50, risk: 10,
-};
-const easeOfUseScores: Record<EaseOfUseLevel, number> = {
-  easy: 100, medium: 60, hard: 20,
-};
-const frequencyScores: Record<ApplicationFrequency, number> = {
-  once: 100, seasonal: 75, regular: 40, frequent: 15,
-};
+import type { Intervention } from '@/data/interventions';
 
 const calculateScore = (
   intervention: Intervention,
@@ -39,16 +20,15 @@ const calculateScore = (
   const totalWeight = effectivenessWeight + ecoWeight + costWeight + healthWeight + easeWeight + frequencyWeight;
   if (totalWeight === 0) return 50;
   const weightedScore =
-    effectivenessScores[intervention.effectiveness] * (effectivenessWeight / totalWeight) +
-    ecoScores[intervention.environmentalImpact] * (ecoWeight / totalWeight) +
-    costScores[intervention.cost] * (costWeight / totalWeight) +
-    healthSafetyScores[intervention.healthSafety] * (healthWeight / totalWeight) +
-    easeOfUseScores[intervention.easeOfUse] * (easeWeight / totalWeight) +
-    frequencyScores[intervention.applicationFrequency] * (frequencyWeight / totalWeight);
+    intervention.effectivenessScore * (effectivenessWeight / totalWeight) +
+    intervention.ecoScore * (ecoWeight / totalWeight) +
+    intervention.costScore * (costWeight / totalWeight) +
+    intervention.healthScore * (healthWeight / totalWeight) +
+    intervention.easeScore * (easeWeight / totalWeight) +
+    intervention.frequencyScore * (frequencyWeight / totalWeight);
 
-  // Apply category factor (proximal/personal = 100, distal/environmental = 50)
   const finalScore = (weightedScore * intervention.categoryScore) / 100;
-  
+
   return finalScore;
 };
 

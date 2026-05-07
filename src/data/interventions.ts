@@ -438,10 +438,10 @@ export const interventions: Intervention[] = [
     healthSafety: 'risk',
     healthRisks: 'Selon l\'INSPQ, la perméthrine serait peu toxique pour l\'humain. Il faut bien identifier les ingrédients actifs avant l\'achat et l\'application et suivre les recommandations du frabricant. Les chats sont particulièrement sensibles à la perméthrine.',
     healthEvidence: 'strong',
-    availability: 'Produits à faire soi-même disponibles en quincaillerie. Application professionnelle interdite au Québec.',
+    availability: 'La perméthrine en vaporisation est interdite au Québec depuis mars 2026. Produits à faire soi-même disponibles en quincaillerie dans d\'autres provinces canadiennes, dont l\'Ontario. Application professionnelle interdite au Québec.',
     applicationFrequency: 'seasonal',
     applicationFrequencyDetails: '1 traitement à toutes les six semaines environ.',
-  },
+ },
   {
     id: 'natural-pesticides',
     name: 'Natural Pesticide Treatment',

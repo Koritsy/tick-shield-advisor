@@ -523,7 +523,7 @@ export const interventions: Intervention[] = [
     frequencyScore: 40,
     easeOfUse: 'easy',
     easeOfUseDetails: 'Facile — tâches d\'entretien régulières.',
-    instructions: 'Il faut adopter des mesures de protection personnelles pour faire cet entretien dans les zones à risque. Ramasser les feuilles régulièrement. Tondre le gazon. Ne pas laisser de la nourriture dehors sur le terrain, ne pas entreposer d\'appats de chasse, installer la mangeoire à oiseaux loin de la maison. Effort et temps nécessaire varient selon la grosseur du terrain. Peut s\'avérer laborieux.',
+    instructions: 'Il faut adopter des mesures de protection personnelles pour faire cet entretien dans les zones à risque. Ramasser les feuilles régulièrement. Tondre le gazon. Ne pas laisser de la nourriture dehors sur le terrain, ne pas entreposer d\'appats de chasse, installer la mangeoire à oiseaux loin de la maison. Limiter la présence de graines ou de fruits provenant des arbres et qui seraient des sources de nourriture pour les animaux. Effort et temps nécessaire varient selon la grosseur du terrain. Peut s\'avérer laborieux.',
     cost: 'low',
     costDetails: 'Gratuit si fait soi-même, 100-300 $/mois pour un paysagiste',
     annualInvestment: 'jusqu\'à 2400 $/an',

@@ -560,7 +560,7 @@ export const interventions: Intervention[] = [
     environmentalImpact: 'caution',
     environmentalDetails: 'Peut altérer l\'écosystème local.',
     environmentalEvidence: 'weak',
-    healthSafety: 'caution',
+    healthSafety: 'safe',
     healthRisks: 'Risques liés au travail physique, exposition à l\'herbe à puce, piqures de tiques pendant le travail.',
     healthEvidence: 'strong',
     availability: 'Toujours disponible.',

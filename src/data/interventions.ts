@@ -557,7 +557,7 @@ export const interventions: Intervention[] = [
     effectivenessDetails: 'Ramassage des feuilles : 75-77 % de réduction des nymphes dans certaines études. Aucun effet pour la tonte dans d\'autres.',
     evidenceQuality: 'weak',
     effectivenessEvidence: 'weak',
-    environmentalImpact: 'caution',
+    environmentalImpact: 'safe',
     environmentalDetails: 'Peut altérer l\'écosystème local.',
     environmentalEvidence: 'weak',
     healthSafety: 'safe',

@@ -102,7 +102,7 @@ export const interventions: Intervention[] = [
     instructions: 'En forêt, marcher sur les sentiers pour limiter le contact avec la végétation sur laquelle les tiques s\'embusquent. Sur le terrain, privilégier les zones ensoleillées, sèches ou peu végétalisées. Si on entre en contact avec la végétation, appliquer les autres mesures de protection personnelle',
     costDetails: 'Gratuit',
     annualInvestment: '0 $',
-    effectivenessDetails: 'L\'efficacité dépend du degré de contact avec la végétation: plus on est en contact avec la végétation, plus le risque augmente. Le fait de rester surr les sentiers a aussi des effets positifs sur la faune et l\'environnement et peuvent aussi réduire le contact avec d\'autres insectes piqueurs ou avec des plantes nuisibles.',
+    effectivenessDetails: 'L\'efficacité dépend du degré de contact avec la végétation: plus on est en contact avec la végétation, plus le risque augmente. Le fait de rester sur les sentiers a aussi des effets positifs sur la faune et l\'environnement et peut aussi réduire le contact avec d\'autres insectes piqueurs ou avec des plantes nuisibles.',
     evidenceQuality: 'weak',
     effectivenessEvidence: 'weak',
     environmentalDetails: 'Aucun impact environnemental.',

@@ -49,4 +49,5 @@ export const interventionImages: Record<string, string> = {
   'rodent-elimination': rodentElimination,
   'deer-acaricide': deerAcaricide,
   'pet-treatment': petTreatment,
+  // 'intervention-id': image,
 };

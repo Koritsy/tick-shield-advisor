@@ -888,8 +888,8 @@ export const regions: { id: Region; label: string }[] = [
   { id: 'us', label: 'États-Unis' },
 ];
 
-// For each intervention, list the regions where it is available.
-// Defaults to all regions if the id is not present in this map.
+// Pour chaque intervention, lister les régions où elle est disponible.
+// Par défaut, les interventions sont considérées comme disponibles dans toutes les régions sauf si elles sont listées ici.
 export const interventionAvailability: Record<string, Region[]> = {
   // Pas disponible au Canada — uniquement aux États-Unis
   'permethrin-spray': ['us'],
@@ -909,5 +909,5 @@ export const regionAvailabilityLabel = (interventionId: string): string => {
   const list = interventionAvailability[interventionId];
   if (!list) return 'Disponible au Québec, ailleurs au Canada et aux États-Unis.';
   const labels = list.map((r) => regions.find((x) => x.id === r)?.label).filter(Boolean);
-  return `Disponible : ${labels.join(', ')}.`;
+  return `Disponible dans les régions suivantes : ${labels.join(', ')}.`;
 };

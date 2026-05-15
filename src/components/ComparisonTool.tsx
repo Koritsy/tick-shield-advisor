@@ -97,7 +97,7 @@ const ComparisonTool = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-1" data-tour="filter-panel">
-            <div className="lg:sticky lg:top-24 max-h-[calc(100vh-6rem)] overflow-y-auto">
+            <div className="lg:sticky lg:top-24 max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-none">
               <FilterPanel
                 effectivenessWeight={effectivenessWeight}
                 ecoWeight={ecoWeight}

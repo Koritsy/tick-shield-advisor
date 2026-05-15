@@ -175,7 +175,7 @@ const InterventionCard = ({ intervention, rank, isComparing = false, isEssential
       </Card>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto scrollbar-none">
           <DialogHeader>
             <DialogTitle>{intervention.nameFr}</DialogTitle>
             <DialogDescription>{intervention.categoryLabel}</DialogDescription>

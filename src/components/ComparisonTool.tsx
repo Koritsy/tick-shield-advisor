@@ -5,8 +5,10 @@ import ComparisonModal from './ComparisonModal';
 import Walkthrough from './Walkthrough';
 import { Button } from '@/components/ui/button';
 import { GitCompareArrows, X, HelpCircle } from 'lucide-react';
-import { interventions } from '@/data/interventions';
+import { interventions, regions, isAvailableInRegion, type Region } from '@/data/interventions';
 import type { Intervention } from '@/data/interventions';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const calculateScore = (
   intervention: Intervention,
@@ -42,6 +44,7 @@ const ComparisonTool = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([
     'personal', 'landscaping', 'wildlife', 'other',
   ]);
+  const [selectedRegion, setSelectedRegion] = useState<Region>('qc');
 
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
@@ -122,9 +125,24 @@ const ComparisonTool = () => {
                   Affichage de toutes les interventions correspondant aux filtres de catégorie et de priorité.
                 </p>
               </div>
-              <span className="text-sm text-muted-foreground">
-                {rankedInterventions.length} interventions trouvées
-              </span>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span className="text-sm text-muted-foreground">
+                  {rankedInterventions.length} interventions trouvées
+                </span>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="region-select" className="text-sm font-medium whitespace-nowrap">Région :</Label>
+                  <Select value={selectedRegion} onValueChange={(v) => setSelectedRegion(v as Region)}>
+                    <SelectTrigger id="region-select" className="w-[220px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {regions.map((r) => (
+                        <SelectItem key={r.id} value={r.id}>{r.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -136,6 +154,7 @@ const ComparisonTool = () => {
                   isEssential={requiredIds.includes(intervention.id)}
                   isComparing={compareIds.includes(intervention.id)}
                   onToggleCompare={handleToggleCompare}
+                  isAvailable={isAvailableInRegion(intervention.id, selectedRegion)}
                 />
               ))}
             </div>

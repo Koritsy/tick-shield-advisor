@@ -839,3 +839,35 @@ export const categories = [
   { id: 'wildlife', label: 'Gestion de la faune', icon: 'Squirrel' },
   { id: 'other', label: 'Autre', icon: 'MoreHorizontal' },
 ] as const;
+
+export type Region = 'qc' | 'ca' | 'us';
+
+export const regions: { id: Region; label: string }[] = [
+  { id: 'qc', label: 'Québec' },
+  { id: 'ca', label: 'Canada (hors Québec)' },
+  { id: 'us', label: 'États-Unis' },
+];
+
+// For each intervention, list the regions where it is available.
+// Defaults to all regions if the id is not present in this map.
+export const interventionAvailability: Record<string, Region[]> = {
+  // Pas disponible au Canada — uniquement aux États-Unis
+  'permethrin-spray': ['us'],
+  'rodent-bait': ['us'],
+  'deer-acaricide': ['us'],
+  // Pas disponible au Québec mais disponible ailleurs au Canada (et aux US)
+  'pesticides': ['ca', 'us'],
+};
+
+export const isAvailableInRegion = (interventionId: string, region: Region): boolean => {
+  const list = interventionAvailability[interventionId];
+  if (!list) return true;
+  return list.includes(region);
+};
+
+export const regionAvailabilityLabel = (interventionId: string): string => {
+  const list = interventionAvailability[interventionId];
+  if (!list) return 'Disponible au Québec, ailleurs au Canada et aux États-Unis.';
+  const labels = list.map((r) => regions.find((x) => x.id === r)?.label).filter(Boolean);
+  return `Disponible : ${labels.join(', ')}.`;
+};

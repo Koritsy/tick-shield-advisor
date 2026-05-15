@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Shield, Leaf, DollarSign, Info, CheckCircle2, AlertTriangle, HelpCircle, XCircle, HeartPulse, Wrench, Clock, BookOpen } from 'lucide-react';
 import type { Intervention, EffectivenessLevel, EcoLevel, CostLevel, HealthSafetyLevel, EaseOfUseLevel, ApplicationFrequency, AspectEvidenceQuality } from '@/data/interventions';
+import { regionAvailabilityLabel } from '@/data/interventions';
 import { interventionImages } from '@/data/interventionImages';
 
 interface InterventionCardProps {
@@ -13,6 +14,7 @@ interface InterventionCardProps {
   isComparing?: boolean;
   isEssential?: boolean;
   onToggleCompare?: (id: string) => void;
+  isAvailable?: boolean;
 }
 
 const effectivenessConfig: Record<EffectivenessLevel, { icon: typeof CheckCircle2; label: string; className: string }> = {
@@ -59,20 +61,27 @@ const EvidenceIcon = ({ quality }: { quality: AspectEvidenceQuality }) => {
   return <AlertTriangle className="h-3 w-3 text-amber-500 shrink-0" />;
 };
 
-const InterventionCard = ({ intervention, rank, isComparing = false, isEssential = false, onToggleCompare }: InterventionCardProps) => {
+const InterventionCard = ({ intervention, rank, isComparing = false, isEssential = false, onToggleCompare, isAvailable = true }: InterventionCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const interventionImage = interventionImages[intervention.id] ?? '/placeholder.svg';
 
   return (
     <>
-      <Card className="group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in" {...(rank === 1 ? { 'data-tour': 'first-card' } : {})}>
-        <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
+      <Card className={`group glass-card hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in ${!isAvailable ? 'opacity-60' : ''}`} {...(rank === 1 ? { 'data-tour': 'first-card' } : {})}>
+        <div className={`relative aspect-[16/9] overflow-hidden border-b border-border ${!isAvailable ? 'grayscale' : ''}`}>
           <img
             src={interventionImage}
             alt={`Illustration pour ${intervention.nameFr}`}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             loading="lazy"
           />
+          {!isAvailable && (
+            <div className="absolute top-2 right-2">
+              <Badge variant="destructive" className="text-xs font-semibold shadow">
+                Non disponible
+              </Badge>
+            </div>
+          )}
         </div>
 
         <CardHeader className="pb-3">
@@ -154,10 +163,11 @@ const InterventionCard = ({ intervention, rank, isComparing = false, isEssential
                 size="sm"
                 className="flex-1"
                 onClick={() => onToggleCompare(intervention.id)}
+                disabled={!isAvailable}
                 {...(rank === 1 ? { 'data-tour': 'compare-button' } : {})}
               >
                 {isComparing ? <CheckCircle2 className="h-4 w-4 mr-1.5" /> : <Shield className="h-4 w-4 mr-1.5" />}
-                {isComparing ? 'Sélectionné' : 'Comparer'}
+                {!isAvailable ? 'Non disponible' : isComparing ? 'Sélectionné' : 'Comparer'}
               </Button>
             )}
           </div>
@@ -180,7 +190,11 @@ const InterventionCard = ({ intervention, rank, isComparing = false, isEssential
             <DetailSection icon={<DollarSign className="h-4 w-4 text-primary" />} title="Détails des coûts" content={`${intervention.costDetails}. Investissement annuel : ${intervention.annualInvestment}`} />
             <DetailSection icon={<Wrench className="h-4 w-4 text-primary" />} title="Facilité d'utilisation" content={intervention.easeOfUseDetails} />
             <DetailSection icon={<Clock className="h-4 w-4 text-primary" />} title="Fréquence d'application" content={intervention.applicationFrequencyDetails} />
-            <DetailSection icon={<Info className="h-4 w-4 text-primary" />} title="Disponibilité" content={intervention.availability} />
+            <DetailSection
+              icon={<Info className="h-4 w-4 text-primary" />}
+              title="Disponibilité"
+              content={`${regionAvailabilityLabel(intervention.id)} ${intervention.availability}`}
+            />
 
             <div className="border-t border-border pt-4">
               <div className="flex items-center gap-2 mb-2">

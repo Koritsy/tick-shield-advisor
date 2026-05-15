@@ -131,7 +131,7 @@ export const interventions: Intervention[] = [
       cost: 'low',
       costDetails: 'Gratuit',
       annualInvestment: '0 $',
-      effectiveness: 'low',
+      effectiveness: 'medium',
       effectivenessDetails: 'L\'efficacité dépend de la rigueur et de la fréquence de l\'inspection. L\'efficacité est probablement plus grande si l\'inspection est minutieuse et si la personne a une bonne vision et sait reconnaître une tique.',
       evidenceQuality: 'weak',
       effectivenessEvidence: 'weak',
